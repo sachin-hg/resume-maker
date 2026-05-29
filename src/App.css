@@ -1,0 +1,859 @@
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  background: #d0d0d0;
+  font-size: 12.5px;
+  color: #333;
+  line-height: 1.45;
+}
+
+/* ── Toolbar ── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 7px 20px;
+  background: #1a2535;
+  color: #ccc;
+  font-size: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+}
+
+.toolbar-hint { color: #999; font-size: 11.5px; }
+
+.toolbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.save-name { color: #6ab; font-size: 10px; font-weight: 600; }
+.save-unsaved { color: #777; font-size: 10px; font-style: italic; }
+
+.sample-select {
+  background: #243444;
+  border: 1px solid #4a6070;
+  color: #bbb;
+  padding: 3px 8px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: inherit;
+  outline: none;
+}
+.sample-select:hover { border-color: #6a8090; }
+
+.btn-save {
+  background: #1a3a2a;
+  border: 1px solid #3a6050;
+  color: #8cbb9a;
+  padding: 3px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: inherit;
+}
+.btn-save:hover { background: #243a2f; }
+
+/* ── Section title row with reorder controls ── */
+.section-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1.5px solid #333;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+}
+
+/* Inline title inside the row — remove its own border (handled by row) */
+.section-title.st-inline {
+  flex: 1;
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.section-move {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.btn-move {
+  background: none;
+  border: 1px solid #ddd;
+  color: #bbb;
+  font-size: 9px;
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  line-height: 1;
+}
+.btn-move:hover:not(:disabled) { border-color: #666; color: #333; background: #f5f5f5; }
+.btn-move:disabled { opacity: 0.25; cursor: default; }
+
+kbd {
+  background: #2a3a4a;
+  border: 1px solid #4a6070;
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-family: inherit;
+  font-size: 11px;
+  color: #ddd;
+}
+
+.btn-reset {
+  background: transparent;
+  border: 1px solid #4a6070;
+  color: #bbb;
+  padding: 3px 10px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 11px;
+  font-family: inherit;
+}
+.btn-reset:hover { background: #2a3a4a; }
+
+/* ── Page background ── */
+.page-bg {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #d0d0d0;
+}
+
+/* ── Content row (panel + resume) ── */
+.content-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 20px;
+  padding: 24px 20px 48px;
+  width: 100%;
+}
+
+/* ── Typography panel ── */
+.typo-panel {
+  width: 214px;
+  flex-shrink: 0;
+  background: #1a2535;
+  border-radius: 5px;
+  position: sticky;
+  top: 46px;
+  max-height: calc(100vh - 62px);
+  overflow-y: auto;
+  font-family: inherit;
+  scrollbar-width: thin;
+  scrollbar-color: #2a3a50 transparent;
+}
+
+.tp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 11px 8px;
+  border-bottom: 1px solid #243040;
+  position: sticky;
+  top: 0;
+  background: #1a2535;
+  z-index: 1;
+}
+
+.tp-title {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #7a9ab0;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.tp-reset {
+  background: none;
+  border: 1px solid #2e3e50;
+  color: #667788;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.tp-reset:hover { border-color: #5a7a8a; color: #99aabb; }
+
+.tp-group {
+  padding: 7px 10px 5px;
+  border-bottom: 1px solid #1f2e40;
+}
+.tp-group:last-child { border-bottom: none; }
+
+.tp-group-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #445566;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.tp-row {
+  margin-bottom: 7px;
+}
+.tp-row:last-child { margin-bottom: 1px; }
+
+.tp-label {
+  font-size: 10px;
+  color: #7a9aaa;
+  margin-bottom: 3px;
+}
+
+.tp-line1 {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-bottom: 3px;
+}
+
+.tp-size {
+  width: 38px;
+  background: #1e2e40;
+  border: 1px solid #2e3e50;
+  color: #b0c0cc;
+  font-size: 11px;
+  padding: 2px 3px;
+  border-radius: 3px;
+  font-family: inherit;
+  text-align: center;
+  outline: none;
+  -moz-appearance: textfield;
+}
+.tp-size::-webkit-inner-spin-button,
+.tp-size::-webkit-outer-spin-button { -webkit-appearance: none; }
+.tp-size:focus { border-color: #4a7a9a; }
+
+.tp-unit {
+  font-size: 9px;
+  color: #445566;
+  margin-right: 1px;
+}
+
+.tp-btn {
+  background: #1e2e40;
+  border: 1px solid #2e3e50;
+  color: #667788;
+  font-size: 11px;
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-family: inherit;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.tp-btn:hover { border-color: #5a7a8a; color: #99aabb; }
+.tp-btn.tp-on { background: #1a4a6a; border-color: #3a7a9a; color: #7acce0; }
+.tp-bold { font-weight: 700; }
+.tp-ital { font-style: italic; }
+
+.tp-color {
+  width: 26px;
+  height: 22px;
+  border: 1px solid #2e3e50;
+  border-radius: 3px;
+  cursor: pointer;
+  padding: 2px;
+  background: #1e2e40;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.tp-color::-webkit-color-swatch-wrapper { padding: 0; }
+.tp-color::-webkit-color-swatch { border: none; border-radius: 2px; }
+
+.tp-line2 {
+  display: flex;
+  gap: 3px;
+}
+
+.tp-align {
+  background: #1e2e40;
+  border: 1px solid #2e3e50;
+  color: #667788;
+  width: 26px;
+  height: 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+}
+.tp-align:hover { border-color: #5a7a8a; color: #99aabb; }
+.tp-align.tp-on { background: #1a4a6a; border-color: #3a7a9a; color: #7acce0; }
+
+/* ── Resume wrapper (A4) ── */
+.resume {
+  width: 210mm;
+  min-height: 297mm;
+  background: #fff;
+  box-shadow: 0 4px 28px rgba(0,0,0,0.28);
+  display: flex;
+  flex-direction: column;
+  font-size: 12.5px;
+}
+
+/* ── HEADER — full dark navy block ── */
+.rh {
+  background: #1e2d3e;
+  padding: 20px 28px 16px;
+  color: #fff;
+}
+
+.rh-name {
+  font-size: 38px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 5px;
+  line-height: 1.1;
+  display: block;
+  letter-spacing: -0.3px;
+}
+
+.rh-title {
+  font-size: 15px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.93);
+  display: block;
+  border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 10px;
+  margin-bottom: 9px;
+}
+
+.rh-summary {
+  font-size: 12px;
+  color: rgba(255,255,255,0.85);
+  display: block;
+  line-height: 1.5;
+}
+
+/* ── Contact bar ── */
+.contact-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 24px;
+  padding: 9px 28px;
+  border-bottom: 1px solid #e2e2e2;
+  font-size: 11.5px;
+  color: #333;
+}
+
+.contact-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.ci-icon {
+  display: flex;
+  align-items: center;
+  color: #1e2d3e;
+  flex-shrink: 0;
+}
+
+/* LinkedIn / GitHub icon as clickable link */
+a.ci-icon, .ci-link-icon {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
+
+/* Contact optional item — hover-reveal remove */
+.ci-opt {
+  position: relative;
+}
+
+.btn-ci-rm {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: transparent;
+  font-size: 11px;
+  padding: 0 0 0 2px;
+  line-height: 1;
+  font-family: inherit;
+  transition: color 0.1s;
+  flex-shrink: 0;
+}
+.ci-opt:hover .btn-ci-rm { color: #ccc; }
+.btn-ci-rm:hover { color: #c0392b !important; }
+
+.btn-ci-add {
+  background: none;
+  border: 1px dashed #ccc;
+  color: #bbb;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+}
+.btn-ci-add:hover { border-color: #666; color: #555; }
+
+.btn-add-link {
+  background: none;
+  border: 1px dashed #bbb;
+  color: #999;
+  font-size: 10.5px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-add-link:hover { border-color: #666; color: #555; }
+
+/* ── Sections ── */
+.section {
+  padding: 14px 28px 8px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #111;
+  text-transform: uppercase;
+  letter-spacing: 0.2px;
+  border-bottom: 1.5px solid #333;
+  padding-bottom: 4px;
+  margin: 0 0 10px;
+}
+
+/* ── Skills ── */
+.skills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  align-items: center;
+}
+
+.skill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background: #1e2d3e;
+  color: #fff;
+  padding: 4px 9px;
+  font-size: 11px;
+  border-radius: 4px;
+}
+
+.skill-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.45);
+  font-size: 13px;
+  padding: 0 0 0 1px;
+  line-height: 1;
+  font-family: inherit;
+}
+.skill-remove:hover { color: #ff8080; }
+
+.btn-add-skill {
+  background: none;
+  border: 1px dashed rgba(61,66,72,0.5);
+  color: #666;
+  font-size: 10.5px;
+  padding: 2px 8px;
+  border-radius: 2px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.btn-add-skill:hover { border-color: #3d4248; color: #3d4248; }
+
+/* ── Work experience ── */
+.job-entry {
+  margin-bottom: 14px;
+}
+
+.job-header-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.job-title {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1a7a70;
+  margin: 0;
+  flex: 1;
+  display: block;
+}
+
+/* Company + period inline on the right of title */
+.job-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  flex-shrink: 0;
+  max-width: 50%;
+}
+
+.job-meta-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 2px;
+}
+
+.job-company-inline {
+  font-size: 12px;
+  font-weight: 400;
+  color: #222;
+}
+
+.meta-sep {
+  font-size: 11px;
+  color: #aaa;
+  flex-shrink: 0;
+}
+
+.job-period-inline {
+  font-size: 11px;
+  font-style: italic;
+  color: #666;
+}
+
+.job-desc {
+  font-style: italic;
+  font-size: 11px;
+  color: #999;
+  margin: 0;
+  display: block;
+}
+
+/* ── Bullets ── */
+.bullets {
+  list-style: none;
+  margin: 0 0 3px;
+  padding: 0;
+}
+
+.bullet-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  margin-bottom: 1.5px;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.bullet-marker {
+  color: #444;
+  flex-shrink: 0;
+  font-size: 9px;
+  line-height: 1.9;
+  letter-spacing: 0;
+}
+
+.bullet-text {
+  flex: 1;
+  display: inline;
+  min-width: 10px;
+}
+
+.bullet-remove {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ccc;
+  font-size: 13px;
+  padding: 0;
+  line-height: 1.5;
+  flex-shrink: 0;
+  font-family: inherit;
+}
+.bullet-remove:hover { color: #c0392b; }
+
+.btn-add-bullet {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #aaa;
+  font-size: 10.5px;
+  padding: 1px 0;
+  font-family: inherit;
+}
+.btn-add-bullet:hover { color: #555; }
+
+/* Optional field rows (company / description / period) */
+.opt-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.opt-row > .job-desc {
+  flex: 1;
+}
+
+.btn-field-rm {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: transparent;
+  font-size: 12px;
+  padding: 0;
+  line-height: 1.5;
+  flex-shrink: 0;
+  font-family: inherit;
+  transition: color 0.1s;
+}
+
+.opt-row:hover .btn-field-rm,
+.job-meta-item:hover .btn-field-rm { color: #ccc; }
+.btn-field-rm:hover { color: #c0392b !important; }
+
+.btn-field-add {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #c0c0c0;
+  font-size: 10px;
+  padding: 0 0 1px;
+  font-family: inherit;
+  font-style: italic;
+  text-decoration: underline;
+  text-decoration-style: dashed;
+  text-underline-offset: 2px;
+  display: block;
+}
+.btn-field-add:hover { color: #555; }
+
+.btn-remove-job {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #ccc;
+  font-size: 11px;
+  padding: 0;
+  flex-shrink: 0;
+  line-height: 1.5;
+  font-family: inherit;
+}
+.btn-remove-job:hover { color: #c0392b; }
+
+.btn-add-section {
+  background: none;
+  border: 1px dashed #ccc;
+  color: #aaa;
+  font-size: 10.5px;
+  padding: 3px 12px;
+  cursor: pointer;
+  margin-top: 4px;
+  width: 100%;
+  font-family: inherit;
+}
+.btn-add-section:hover { border-color: #888; color: #555; }
+
+/* ── Extra (configurable) section ── */
+.extra-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 0;
+}
+
+.extra-section-title {
+  flex: 1;
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* Extra section title row */
+.extra-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-bottom: 1.5px solid #333;
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+}
+
+.extra-title-row .extra-section-title {
+  flex: 1;
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.btn-remove-section {
+  background: none;
+  border: 1px solid #e0e0e0;
+  color: #bbb;
+  font-size: 10px;
+  padding: 2px 7px;
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 2px;
+  font-family: inherit;
+}
+.btn-remove-section:hover { border-color: #c0392b; color: #c0392b; }
+
+/* Adaptive grid: 2-col by default, 1-col when single */
+.extra-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 28px;
+}
+
+.extra-grid.extra-grid-single {
+  grid-template-columns: 1fr;
+}
+
+.extra-item-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.extra-item-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+  margin: 0 0 1px;
+  flex: 1;
+  display: block;
+}
+
+.extra-item-desc {
+  font-style: italic;
+  font-size: 11.5px;
+  color: #555;
+  display: block;
+  line-height: 1.4;
+}
+
+/* ── Drag & drop handles ── */
+.sk-handle {
+  color: rgba(255,255,255,0.2);
+  font-size: 9px;
+  cursor: grab;
+  margin-right: 2px;
+  flex-shrink: 0;
+  user-select: none;
+  line-height: 1;
+  transition: color 0.1s;
+}
+.skill-tag:hover .sk-handle { color: rgba(255,255,255,0.55); }
+.sk-handle:active { cursor: grabbing; }
+
+.bu-handle {
+  color: transparent;
+  font-size: 9px;
+  cursor: grab;
+  flex-shrink: 0;
+  user-select: none;
+  line-height: 1.65;
+  width: 10px;
+  text-align: center;
+  transition: color 0.1s;
+}
+.bullet-row:hover .bu-handle { color: #c0c0c0; }
+.bu-handle:active { cursor: grabbing; }
+
+/* Drag state — source */
+.sk-drag { opacity: 0.3; }
+.bu-drag { opacity: 0.3; }
+
+/* Drag state — drop target */
+.sk-over { outline: 1.5px dashed rgba(255,255,255,0.5); outline-offset: 2px; }
+.bu-over { border-top: 2px solid #1a7a70; margin-top: -1px; }
+
+/* ── Editable affordance ── */
+.e {
+  cursor: text;
+  outline: none;
+  border-radius: 2px;
+  min-width: 4px;
+  display: inline;
+}
+
+/* block-level editables */
+.rh-name, .rh-title, .rh-summary,
+.job-title, .job-desc,
+.extra-item-title, .extra-item-desc,
+.extra-section-title {
+  display: block;
+}
+
+.e:hover { background: rgba(52,152,219,0.07); }
+.e:focus { background: rgba(52,152,219,0.12); outline: 1px dashed rgba(52,152,219,0.5); outline-offset: 1px; }
+
+/* Dark bg (header) */
+.rh .e:hover { background: rgba(255,255,255,0.07); }
+.rh .e:focus { background: rgba(255,255,255,0.11); outline-color: rgba(255,255,255,0.35); }
+
+/* Skill chips (dark bg) */
+.skill-tag .e:hover { background: rgba(255,255,255,0.1); }
+.skill-tag .e:focus { background: rgba(255,255,255,0.15); outline-color: rgba(255,255,255,0.4); }
+
+/* ── Print ── */
+@media print {
+  html, body { margin: 0; padding: 0; background: #fff !important; }
+
+  .page-bg { padding: 0 !important; background: none !important; min-height: 0 !important; display: block !important; }
+  .content-row { display: block !important; padding: 0 !important; gap: 0 !important; }
+  .resume { width: 100% !important; min-height: 0 !important; box-shadow: none !important; margin: 0 !important; }
+
+  .no-print { display: none !important; }
+  .sk-handle, .bu-handle { display: none !important; }
+  [draggable] { cursor: default !important; }
+
+  .e { cursor: default !important; }
+  .e:hover, .e:focus { background: transparent !important; outline: none !important; }
+
+  /* Avoid breaking inside a single job entry (title+desc+bullets stay together) */
+  .job-entry { break-inside: avoid; page-break-inside: avoid; }
+  /* Keep title row + description on the same page as first bullet */
+  .job-header-row { break-after: avoid; page-break-after: avoid; }
+  .job-desc { break-after: avoid; page-break-after: avoid; }
+  /* Don't split a single bullet line */
+  .bullet-row { break-inside: avoid; page-break-inside: avoid; }
+  /* Extra section items stay together */
+  .extra-item { break-inside: avoid; page-break-inside: avoid; }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+}
+
+/* Page 1: no top margin (header fills from top) */
+/* Page 2+: top margin so content doesn't start at the very edge */
+@page { size: A4; margin: 16mm 0 0 0; }
+@page :first { margin-top: 0; }
