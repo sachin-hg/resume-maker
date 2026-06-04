@@ -1,0 +1,103 @@
+.container {
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100px;
+    overflow: visible;
+}
+
+.slides-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+}
+
+.slides {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    
+}
+
+
+.prevNav {
+    background: #1a2535;
+    color: #ccc;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.nextNav {
+    background: #1a2535;
+    color: #ccc;
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+.slide {
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+}
+.dots {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    padding: 10px;
+    transform: translateX(-50%);
+    z-index: 1;
+
+}
+.dot {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+    margin: 0 5px;
+    border-radius: 50%;
+    border: 1px solid #1a2535;
+    background: #1a2535;
+    cursor: pointer;
+}
+
+.dot.active {
+    background: #fff;
+}
+
+.slides.prev, .slides.next {
+    width: 200%;
+}
+
+.slides.prev .slide, .slides.next .slide {
+    width: 50%;
+}
+
+.slides.prev {
+    left: -100%;
+    transition: transform 0.4s ease-in-out;
+    transform: translateX(50%);
+}
+
+.slides.next {
+    left: 0;
+    transition: transform 0.4s ease-in-out;
+    transform: translateX(-50%);
+}
