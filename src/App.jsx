@@ -271,7 +271,8 @@ function parseMd(md) {
   const result = {
     name: '', title: '', summary: '',
     contact: { email: '', phone: '', location: '', showLocation: true, linkedin: '', showLinkedin: true, github: '', showGithub: false },
-    skills: [], workExperience: [],
+    skills: [], skillRatings: {}, skillsMode: 'chips',
+    workExperience: [],
     education: [],
     achievements: [],
     languages: [],
@@ -344,7 +345,25 @@ function parseMd(md) {
       }
       continue
     }
-    if (section === 'skills') { result.skills = line.split(',').map(s => s.trim()).filter(Boolean); continue }
+    if (section === 'skills') {
+      const items = line.split(',').map(s => s.trim()).filter(Boolean)
+      result.skills = []
+      result.skillRatings = {}
+      for (const item of items) {
+        if (item.includes('|')) {
+          const [name, ratingStr] = item.split('|').map(s => s.trim())
+          if (name) {
+            result.skills.push(name)
+            const r = parseInt(ratingStr)
+            if (!isNaN(r) && r > 0) result.skillRatings[name] = r
+          }
+        } else {
+          result.skills.push(item)
+        }
+      }
+      result.skillsMode = Object.keys(result.skillRatings).length > 0 ? 'rated' : 'chips'
+      continue
+    }
     if (section === 'work' && currentJob) {
       if (!currentJob.company && line.includes('·')) {
         const di = line.indexOf('·'); currentJob.company = line.slice(0, di).trim(); currentJob.period = line.slice(di + 1).trim()
@@ -435,7 +454,8 @@ function dataToMd(data, typo) {
   for (const id of order) {
     if (id === 'skills') {
       lines.push('## Skills')
-      lines.push(data.skills.join(', '))
+      const hasRatings = data.skillRatings && Object.keys(data.skillRatings).length > 0
+      lines.push(data.skills.map(s => (hasRatings && data.skillRatings[s]) ? `${s} | ${data.skillRatings[s]}` : s).join(', '))
       lines.push('')
     }
     if (id === 'work') {

@@ -10,7 +10,7 @@ linkedin: /in/your-linkedin
 github: /your-github
 
 ## Skills
-Skill A, Skill B, Skill C, Skill D, Skill E
+Skill A | 5, Skill B | 4, Skill C | 3, Skill D | 2, Skill E
 
 ## Work Experience
 

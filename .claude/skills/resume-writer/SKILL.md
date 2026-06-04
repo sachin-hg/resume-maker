@@ -83,7 +83,7 @@ No bullets, no description, unless the Layout Plan allocates lines for a notable
 
 ### Skills
 
-Single comma-separated line. Order: AI/ML tools → core language/framework → infra/build → observability/ops. Derive from everything in the Content Map — explicit list plus all tech mentioned in work bullets.
+Single comma-separated line. Format: `Skill | Rating, Skill, Skill | Rating` — rating 1–5 is optional per skill. Include ratings if the user provided them or if the Layout Plan indicates rated mode. Order: AI/ML tools → core language/framework → infra/build → observability/ops. Derive from everything in the Content Map — explicit list plus all tech mentioned in work bullets.
 
 ### Key Achievements
 
@@ -180,9 +180,11 @@ The parser checks for `·` (Unicode U+00B7, the middle dot) — **not** a hyphen
 Always copy-paste `·` or write it explicitly — do not substitute.
 
 ### Skills section
-- Must be **exactly one comma-separated line**.
-- The parser reads the first non-empty line in the skills section and splits by comma.
-- A second line of skills would be ignored entirely.
+- Must be **exactly one comma-separated line**. A second line would be ignored entirely.
+- Each item is either `Skill Name` (chip, no rating) or `Skill Name | Rating` (rated, 1–5).
+- Both forms can be mixed on the same line: `React | 5, TypeScript | 4, HTML, CSS`.
+- If **any** skill has a rating, the section loads in rated/bar mode automatically. If none have ratings, it loads as chips.
+- Unrated skills in a rated-mode list display with 0 dots — intentional, the user can set them in the UI.
 
 ### Pipe-separated sections
 All of these use `|` as the field separator. The parser splits all `|` characters. Extra whitespace around `|` is trimmed.
@@ -243,7 +245,7 @@ linkedin: /in/handle
 github: /handle
 
 ## Skills
-Skill A, Skill B, Skill C
+Skill A | 5, Skill B | 4, Skill C | 3, Skill D
 
 ## Work Experience
 

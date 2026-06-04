@@ -144,7 +144,7 @@ linkedin: /in/your-handle
 github: /your-handle
 
 ## Skills
-Skill A, Skill B, Skill C, Skill D
+Skill A | 5, Skill B | 4, Skill C | 3, Skill D
 
 ## Work Experience
 
@@ -203,7 +203,7 @@ Another Item | Another description
 |---|---|---|
 | *(top of file)* | `# Name` → title line → summary line | Name is `# H1`; next two plain lines are title and summary |
 | `## Contact` | `key: value` pairs | Keys: `email`, `phone`, `location`, `linkedin`, `github` |
-| `## Skills` | comma-separated values on one line | Rendered as chips or rated bars (toggle in UI) |
+| `## Skills` | `Skill \| Rating, Skill, Skill \| Rating` — comma-separated; rating 1–5 is optional per skill | If any skill has a rating the section loads in rated mode; without ratings it loads as chips |
 | `## Work Experience` | `### Title` → `Company · Period` → description → `- bullets` | Company and period separated by `·`; description is first non-bullet line |
 | `## Education` | `### Degree` → `Institution · Period · Location` | Parts separated by `·`; location is optional |
 | `## Key Achievements` | `Title \| Description` (one per line) | Pipe separates title from description |
