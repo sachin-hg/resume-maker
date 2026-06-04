@@ -67,6 +67,28 @@ Institution · Year
 Achievement Title | One-sentence description of the achievement
 Second Achievement | Another description
 
+## Languages
+English | Native | 5
+French | Intermediate | 3
+
+## Courses
+AWS Solutions Architect | A Cloud Guru | 2023 | Hands-on cloud architecture course
+Machine Learning | Coursera | 2022 |
+
+## Passions & Interests
+star | Photography | Capturing landscapes and street scenes
+heart | Music | Playing guitar and piano
+code | Open Source | Contributing to developer tooling
+
+## Certifications
+AWS Solutions Architect – Associate | Amazon Web Services | 2023
+Google Cloud Professional | Google | 2022
+
+## My Time
+Deep Work | 4
+Meetings | 2
+Learning | 1
+
 ## Any Custom Section Title
 Item Title | Item description shown alongside the title
 Another Item | Another description
@@ -82,17 +104,12 @@ Another Item | Another description
 | `## Work Experience` | `### Title` → `Company · Period` → description → `- bullets` | Company and period separated by `·`; description is first non-bullet line |
 | `## Education` | `### Degree` → `Institution · Period · Location` | Parts separated by `·`; location is optional |
 | `## Key Achievements` | `Title \| Description` (one per line) | Pipe separates title from description |
+| `## Languages` | `Name \| Level \| Rating` (one per line) | Rating is 0–5 |
+| `## Courses` | `Title \| Provider \| Year \| Description` (one per line) | Year and description are optional |
+| `## Passions & Interests` | `Icon \| Title \| Description` (one per line) | Icon: `star`, `heart`, `code`, `lightning`, `trophy`, `target`, `book`, `user`, `globe`, `music`, `idea` |
+| `## Certifications` | `Title \| Issuer \| Date` (one per line) | Date is optional |
+| `## My Time` | `Label \| Value` (one per line) | Value is a relative weight used in the donut chart |
 | *any other `##` heading* | `Title \| Description` (one per line) | Becomes the Custom Section; heading text is used as the section title |
-
-### Sections only available via the UI
-
-These cannot be loaded from a `.md` file but can be added and filled in the browser:
-
-- **Languages** — name, proficiency level, star/dot rating
-- **Courses** — title, provider, year, description
-- **Passions & Interests** — icon, title, description
-- **Certifications** — title, issuer, date
-- **My Time** — donut chart of how you spend your time
 
 ### Typography comment (optional)
 

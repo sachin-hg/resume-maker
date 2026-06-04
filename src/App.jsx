@@ -274,6 +274,11 @@ function parseMd(md) {
     skills: [], workExperience: [],
     education: [],
     achievements: [],
+    languages: [],
+    courses: [],
+    passions: [],
+    certifications: [],
+    mytime: [],
     extraSection: { title: 'PREVIOUS ORGANIZATIONS', visible: false, items: [] },
     sectionOrder: ['skills', 'work', 'extra'],
   }
@@ -305,6 +310,11 @@ function parseMd(md) {
         if (!result.sectionOrder.includes('achievements')) result.sectionOrder.push('achievements')
         continue
       }
+      if (secUp === 'LANGUAGES') { section = 'languages'; if (!result.sectionOrder.includes('languages')) result.sectionOrder.push('languages'); continue }
+      if (secUp === 'COURSES') { section = 'courses'; if (!result.sectionOrder.includes('courses')) result.sectionOrder.push('courses'); continue }
+      if (secUp === 'PASSIONS & INTERESTS' || secUp === 'PASSIONS') { section = 'passions'; if (!result.sectionOrder.includes('passions')) result.sectionOrder.push('passions'); continue }
+      if (secUp === 'CERTIFICATIONS') { section = 'certifications'; if (!result.sectionOrder.includes('certifications')) result.sectionOrder.push('certifications'); continue }
+      if (secUp === 'MY TIME') { section = 'mytime'; if (!result.sectionOrder.includes('mytime')) result.sectionOrder.push('mytime'); continue }
       section = 'extra'; result.extraSection.title = sec.toUpperCase(); result.extraSection.visible = true; extraItems = []; continue
     }
     if (line.startsWith('### ')) {
@@ -359,6 +369,31 @@ function parseMd(md) {
         const pi = line.indexOf('|')
         achItems.push({ id: achItems.length + 1, title: line.slice(0, pi).trim(), description: line.slice(pi + 1).trim() })
       }
+      continue
+    }
+    if (section === 'languages' && line.includes('|')) {
+      const parts = line.split('|').map(p => p.trim())
+      result.languages.push({ id: result.languages.length + 1, name: parts[0] || '', level: parts[1] || '', rating: parseInt(parts[2]) || 0 })
+      continue
+    }
+    if (section === 'courses' && line.includes('|')) {
+      const parts = line.split('|').map(p => p.trim())
+      result.courses.push({ id: result.courses.length + 1, title: parts[0] || '', provider: parts[1] || '', year: parts[2] || '', description: parts[3] || '' })
+      continue
+    }
+    if (section === 'passions' && line.includes('|')) {
+      const parts = line.split('|').map(p => p.trim())
+      result.passions.push({ id: result.passions.length + 1, icon: parts[0] || 'star', title: parts[1] || '', description: parts[2] || '' })
+      continue
+    }
+    if (section === 'certifications' && line.includes('|')) {
+      const parts = line.split('|').map(p => p.trim())
+      result.certifications.push({ id: result.certifications.length + 1, title: parts[0] || '', issuer: parts[1] || '', date: parts[2] || '' })
+      continue
+    }
+    if (section === 'mytime' && line.includes('|')) {
+      const parts = line.split('|').map(p => p.trim())
+      result.mytime.push({ id: result.mytime.length + 1, label: parts[0] || '', value: parseInt(parts[1]) || 1 })
       continue
     }
     if (section === 'extra' && line.includes('|')) {
@@ -430,6 +465,31 @@ function dataToMd(data, typo) {
     if (id === 'achievements' && data.achievements?.length) {
       lines.push('## Key Achievements')
       for (const a of data.achievements) lines.push(`${a.title} | ${a.description}`)
+      lines.push('')
+    }
+    if (id === 'languages' && data.languages?.length) {
+      lines.push('## Languages')
+      for (const l of data.languages) lines.push(`${l.name} | ${l.level} | ${l.rating ?? 0}`)
+      lines.push('')
+    }
+    if (id === 'courses' && data.courses?.length) {
+      lines.push('## Courses')
+      for (const c of data.courses) lines.push(`${c.title} | ${c.provider} | ${c.year || ''} | ${c.description || ''}`)
+      lines.push('')
+    }
+    if (id === 'passions' && data.passions?.length) {
+      lines.push('## Passions & Interests')
+      for (const p of data.passions) lines.push(`${p.icon || 'star'} | ${p.title} | ${p.description}`)
+      lines.push('')
+    }
+    if (id === 'certifications' && data.certifications?.length) {
+      lines.push('## Certifications')
+      for (const c of data.certifications) lines.push(`${c.title} | ${c.issuer} | ${c.date || ''}`)
+      lines.push('')
+    }
+    if (id === 'mytime' && data.mytime?.length) {
+      lines.push('## My Time')
+      for (const m of data.mytime) lines.push(`${m.label} | ${m.value}`)
       lines.push('')
     }
     if (id === 'extra' && data.extraSection.visible && data.extraSection.items.length > 0) {
