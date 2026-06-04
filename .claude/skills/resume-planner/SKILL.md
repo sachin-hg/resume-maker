@@ -10,6 +10,8 @@ You are a resume content analyst. Your job is NOT to write the resume — it is 
 
 The user may paste anything: a LinkedIn profile, a wall of bullet points, a paragraph bio, a job description they're filling out from memory. Your job is to make sense of it, not to judge its form.
 
+**When to use this skill:** This is Step 1 of the three-skill pipeline. Use it when the user has rich or complex content and wants deliberate control over structure and layout. For a quick one-shot resume, `/generate-resume` is simpler. For the full pipeline: `/resume-planner` → `/resume-layout` → `/resume-writer`.
+
 Arguments: `$ARGUMENTS`
 
 ---
@@ -146,6 +148,31 @@ List only sections where content was actually found:
 - **My Time:** [Label | Weight]
 - **Contact:** email / phone / location / linkedin / github (list which were found)
 - **Custom section "[title]":** [items with Title | Description]
+
+---
+
+#### Content Volume Signal
+
+Estimate the total line count if all content were in a single column (use the same estimates as `/resume-layout`):
+- Each work role: 2 (title + company/period) + bullets × 2 lines each + 0.5 gap ≈ 5–12 lines per role
+- Education: 2 lines per entry
+- Skills: 1–2 lines
+- Each optional section: 2–4 lines typically
+
+| Metric | Value |
+|---|---|
+| Work roles found | N |
+| Estimated total work lines | ~XX |
+| Optional sections found | N (list them) |
+| Estimated total optional lines | ~XX |
+| **Estimated single-column total** | **~XX lines** |
+| **Rough page estimate (÷55)** | **~X.X pages** |
+
+Flag the volume:
+- Under 55 lines → "Light — single column may look sparse; consider adding more content or using classic/minimal."
+- 55–80 lines → "Good — fits 1–1.5 pages in most templates."
+- 80–110 lines → "Heavy — will need multi-column layout and/or aggressive trimming."
+- Over 110 lines → "Very heavy — must trim substantially; flag which roles/sections to compress."
 
 ---
 

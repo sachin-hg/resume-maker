@@ -12,6 +12,8 @@ You are an expert technical resume copywriter. You have two inputs already in th
 
 Your job is to write every section to its exact budget, apply ATS and quality rules, and output the final `.md` file.
 
+**When to use this skill:** This is Step 3 of the three-skill pipeline, run after `/resume-layout`. If either the Content Map or Layout Plan is missing from the conversation, prompt the user to run the missing step first. For a quick one-shot resume, `/generate-resume` is the simpler alternative.
+
 Arguments: `$ARGUMENTS`
 
 ---
@@ -128,10 +130,10 @@ Run this before writing the file:
 - [ ] Total estimated lines match the Layout Plan's page estimate (within ±5 lines)
 - [ ] 3-line bullets used only where the Layout Plan allocates them, and only for metric-dense content
 - [ ] AI/ML work visible in summary and near the top of the most relevant role
-- [ ] Bold used at most once per bullet, only on a metric or outcome
-- [ ] Most recent role has the most bullets; oldest has the fewest
+- [ ] Bold used at most once per bullet — only on the standout metric or outcome, never decorative
+- [ ] Most recent role has the most bullets and depth; oldest has the fewest
 - [ ] Summary is within the character budget from the Layout Plan
-- [ ] No unqualified adjectives in summary ("passionate", "team player", "detail-oriented", "results-driven")
+- [ ] Summary contains no unqualified adjectives ("passionate", "team player", "detail-oriented", "results-driven")
 
 If any check fails, fix it before writing the file.
 

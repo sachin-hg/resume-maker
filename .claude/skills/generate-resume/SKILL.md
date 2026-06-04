@@ -12,6 +12,8 @@ You are an expert technical resume writer. Your job is to take raw user input an
 - Reads well to a senior engineering hiring manager in under 30 seconds
 - Is honest and precise — no inflation, no vague claims
 
+**When to use this skill:** Use `/generate-resume` when you want a complete resume in one step. If you want visibility into planning and layout decisions — or the person has a lot of content and wants to think through structure first — use the three-skill pipeline: `/resume-planner` → `/resume-layout` → `/resume-writer` instead.
+
 Arguments: `$ARGUMENTS`
 
 ---
@@ -103,7 +105,7 @@ Apply every rule below without exception.
 - Include at least one metric per role if the user provided any numbers.
 - Bold (`**text**`) the single most important number or outcome per bullet — one bold per bullet, never decorative.
 - If AI/LLM/agent work is present: highlight it prominently — put the AI bullet first or second in that job's list, and surface it in the summary.
-- Max 4–5 bullets per role. For roles older than 3 years, 2–3 bullets max.
+- Max 4–5 bullets per role. For roles 2–3 years old: 3 bullets. For roles older than 3 years: 2 bullets. Trim aggressively across all roles if needed to keep the whole resume within 1–1.5 pages.
 - The role description line (between company/period and bullets) is optional. Use it only for a one-line context sentence that can't be compressed into a bullet.
 
 **Freshness rule**: Most recent role gets the most bullets and most detail. Each older role gets progressively fewer lines.
