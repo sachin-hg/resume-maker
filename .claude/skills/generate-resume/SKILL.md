@@ -16,45 +16,66 @@ Arguments: `$ARGUMENTS`
 
 ---
 
-## Step 1 — Gather input
+## Step 1 — Extract what you have
 
-If `$ARGUMENTS` is non-empty, treat it as the raw resume content and proceed directly to Step 2.
+Parse everything in `$ARGUMENTS` plus any prior messages in this conversation. Extract whatever is already present across these fields:
 
-Otherwise, ask the user for the following in a single message (collect all at once, not one-by-one):
+**Critical (required — cannot write the resume without these):**
+- `name` — full name
+- `work_experience` — at least one role with: title, company, period, and some description of what they did
+- `education` — at least one: degree, institution, year
 
-1. **Full name**
-2. **Current or most recent job title + company**
-3. **One-line professional summary** (or let them paste a bio — you'll rewrite it)
-4. **Contact info** — email, phone, location, LinkedIn handle, GitHub handle (all optional)
-5. **Work experience** — for each role: company, title, period, and a raw dump of what they did (bullets, paragraphs, anything)
-6. **Education** — degree, institution, year
-7. **Skills** — any list; you'll reorder and expand
-8. **Key achievements** — standalone wins not tied to a single role (optional)
-9. **Languages** — name + level + rating 0–5 (optional)
-10. **Certifications** — title, issuer, year (optional)
-11. **Courses** — title, provider, year, description (optional)
-12. **Passions & Interests** — what they care about outside work (optional)
-13. **My Time** — how they spend their time, with relative weights e.g. "Deep Work 4, Meetings 1" (optional)
-14. **Custom section** — any other section with a title + pipe-separated items (optional)
+**Important (derive if missing, ask only if you truly cannot infer):**
+- `skills` — any technologies, tools, languages mentioned. You can derive these from their work experience if not explicitly listed.
 
-Wait for their response, then proceed to Step 2.
+**Optional (include if provided, never ask for):**
+- Contact: email, phone, location, LinkedIn, GitHub
+- Key achievements
+- Languages
+- Certifications
+- Courses
+- Passions & Interests
+- My Time
+- Any custom section
 
 ---
 
-## Step 2 — Transform the content
+## Step 2 — Identify gaps and clarify
+
+After extracting, check which critical fields are missing or too thin to work with:
+
+**If `name` is missing:** Ask for it directly.
+
+**If `work_experience` is missing or too vague** (e.g. just "worked at Google for 3 years" with nothing about what they did): Ask specifically for the roles that are unclear. For each, ask: title, company, period, and a raw description of what they built/owned/achieved. Do not ask for pre-polished bullets — raw notes are fine.
+
+**If `education` is missing:** Ask for it. Keep it brief: degree, institution, year (and city if they want).
+
+**If `skills` are not listed AND cannot be reasonably inferred from the experience provided:** Ask for a skills list. If you can infer a reasonable list from their experience (e.g. they mention React, TypeScript, AWS in their bullet dumps), don't ask — derive it.
+
+**How to ask:**
+- Group all missing critical fields into a single message. Never ask field by field across multiple turns.
+- Be specific about what's missing and why it's needed.
+- Tell them optional fields are optional and they can skip them.
+- Example: "I have your experience at Directi and your education. I'm missing: (1) your full name, (2) what you built at Housing.com — just rough notes are fine. Once I have those I'll generate the file."
+
+**If all critical fields are present:** Skip this step entirely and go straight to Step 3.
+
+---
+
+## Step 3 — Transform the content
 
 Apply every rule below without exception.
 
 ### Name, title, summary (header block)
 
-- **Title line**: `Role @ Company · Notable qualifier`. Keep it to one line. If they're job-seeking, use their target title. Include a key differentiator (e.g. "Ex-Google", "10 yrs", "AI-focused").
+- **Title line**: `Role @ Company · Notable qualifier`. One line. If they're job-seeking, use their target title. Include a key differentiator (e.g. "Ex-Google", "10 yrs", "AI-focused").
 - **Summary line**: One dense sentence. Structure: `[X years] [domain expertise] [standout technology/method] [impact signal]`. Max ~200 chars. No "I am", no "passionate about", no adjectives without evidence. If they have AI/LLM/ML work, mention it here.
 
 ### Skills
 
-- Order by market relevance right now: AI/ML tools first (LLMs, RAG, agents, LangChain, etc.), then core language/framework, then infra/build tooling, then observability/ops.
-- Trim duplicates and aliases (keep the more recognized name).
-- Add obvious unlisted skills you can infer from their experience (e.g. they used Next.js → SSR; they used Sentry → observability).
+- Derive from both explicit list and everything mentioned in work experience.
+- Order by market relevance: AI/ML tools first (LLMs, RAG, agents, LangChain, vector DBs, etc.), then core language/framework, then infra/build tooling, then observability/ops.
+- Trim duplicates and aliases — keep the more recognized name.
 - Output as a single comma-separated line.
 
 ### Work Experience — the most critical section
@@ -63,12 +84,14 @@ Apply every rule below without exception.
 - Each bullet must fit on **at most 2 lines** when printed (≈ 110–120 chars including leading dash). Aim for 90–100 chars.
 - The entire resume should have **at most 2–3 bullets at 3 lines**; reserve these for the most impressive, number-rich achievements.
 - Start with a strong past-tense verb: Built, Architected, Reduced, Increased, Shipped, Designed, Migrated, Eliminated, Automated, Optimized.
-- Lead with the **outcome or number** where possible: "Reduced bundle 60% (300 → 125 KB) by…" not "Worked on bundle optimization that resulted in…"
-- Include at least one metric per role if the user provided any.
-- Bold (`**text**`) the key number or outcome in each bullet — one bold per bullet, max two.
-- If AI/LLM/agent work is present: highlight it prominently — put the AI role bullet first or second in that job's list.
-- Max 4–5 bullets per role. For older roles (3+ years ago), 2–3 bullets max.
-- The role description line (between company/period and bullets) is optional. Use it only for a one-line context sentence that can't fit in a bullet.
+- Lead with the **outcome or number** where possible: "Reduced bundle **60%** (300 → 125 KB) by…" not "Worked on bundle optimization that resulted in…"
+- Include at least one metric per role if the user provided any numbers.
+- Bold (`**text**`) the single most important number or outcome per bullet — one bold per bullet, never decorative.
+- If AI/LLM/agent work is present: highlight it prominently — put the AI bullet first or second in that job's list, and surface it in the summary.
+- Max 4–5 bullets per role. For roles older than 3 years, 2–3 bullets max.
+- The role description line (between company/period and bullets) is optional. Use it only for a one-line context sentence that can't be compressed into a bullet.
+
+**Freshness rule**: Most recent role gets the most bullets and most detail. Each older role gets progressively fewer lines.
 
 **Role header format:**
 ```
@@ -79,12 +102,10 @@ Optional one-line role context.
 - Bullet
 ```
 
-**Freshness**: Most recent role gets the most bullets and the most detail. Oldest roles are compressed to 1–2 lines.
-
 ### Education
 
-- Degree line, then `Institution · Year · City`.
-- No description needed unless there's a notable thesis or distinction.
+- `### Degree Name` then `Institution · Year · City`.
+- No description unless there's a notable distinction.
 
 ### Key Achievements
 
@@ -112,28 +133,28 @@ Format: `Label | Weight`. Weight is a relative integer (higher = more time).
 
 ### Custom section
 
-Any extra section. Use the heading of their choice. Format: `Title | Description`.
+Format: `Title | Description`. Use whatever heading they provided.
 
 ---
 
-## Step 3 — ATS and quality checklist
+## Step 4 — ATS and quality checklist
 
-Before outputting, verify:
-- [ ] Job titles in `### ` headings match standard industry terms (not internal company jargon)
-- [ ] Skills section contains the keywords from the user's target role/domain
+Before writing the file, verify:
+- [ ] Job titles in `### ` headings are standard industry terms, not internal company jargon
+- [ ] Skills section contains the key words from their domain
 - [ ] Every role has at least one number or concrete outcome
 - [ ] No bullet starts with "Responsible for", "Worked on", "Helped", "Assisted", "Involved in"
-- [ ] No bullet exceeds ~120 chars (2 printed lines)
-- [ ] AI/ML work is visible in the first screen (top half of resume)
-- [ ] Summary does not contain "passionate", "team player", "detail-oriented", "results-driven" unless qualified by evidence
-- [ ] Bold used sparingly — 1 bold per bullet, no decorative bolding
-- [ ] Latest role has the most depth; oldest role the least
+- [ ] No bullet exceeds ~120 chars
+- [ ] AI/ML work (if any) is visible in the top half of the resume
+- [ ] Summary contains no unqualified adjectives ("passionate", "team player", "detail-oriented")
+- [ ] Bold used once per bullet max — only on the standout metric or outcome
+- [ ] Most recent role has the most depth; oldest the least
 
 ---
 
-## Step 4 — Output
+## Step 5 — Output
 
-Write the final file to `samples/<firstname-lowercase>.md` using the exact format below. Then confirm to the user with the file path and a one-line summary of what was generated.
+Write the final file to `samples/<firstname-lowercase>.md`. Then confirm to the user: file path + one sentence on what was generated.
 
 ### Exact file format
 
@@ -157,12 +178,12 @@ Skill A, Skill B, Skill C
 ### Job Title
 Company · Month Year – Month Year
 Optional context line.
-- **Outcome/number** — how it was achieved and what mattered.
+- **Outcome/number** — how it was achieved and why it mattered.
 - Another bullet.
 
 ### Earlier Title
 Company · Month Year – Month Year
-- Compressed bullet.
+- Compressed bullet for older role.
 
 ## Education
 
@@ -201,5 +222,5 @@ Omit any section the user did not provide data for.
 - Objective, factual, third-person implied (no "I")
 - Precise over vague: "reduced latency 40%" beats "improved performance"
 - Crisp over comprehensive: one tight sentence beats two loose ones
-- Industry-standard terminology, not company-internal names
-- If something is unclear or undersold in the user's input, ask one focused clarifying question before writing — don't invent metrics
+- Industry-standard terminology, not internal company names
+- Never invent metrics — if a number seems implied but wasn't stated, write without it or ask once
