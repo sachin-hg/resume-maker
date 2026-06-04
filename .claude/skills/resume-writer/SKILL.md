@@ -69,6 +69,7 @@ For each role, in order (most recent first):
 - **3-line exception:** allowed only if the Layout Plan explicitly allocates 3-line slots for this role, AND the bullet contains multiple concrete metrics that lose meaning if cut, AND no word is removable. Never for context or description.
 - No bullet starts with: "Responsible for", "Worked on", "Helped", "Assisted", "Involved in", "Part of".
 - Do not invent metrics. If a number seems implied but wasn't in the Content Map, write the bullet without it.
+- For any content flagged "colleague-sourced — confirm ownership" in the Content Map: include the metric only if the user confirmed it in the conversation. If unconfirmed, write the bullet without the metric and note it in the post-write report ("Bullet X in Role Y is missing a metric — sourced from colleague resume, confirm you can claim it").
 
 **Freshness:** Most recent role gets the most bullets and most detail as specified. Each older role gets fewer, per the Layout Plan.
 

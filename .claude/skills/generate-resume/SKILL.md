@@ -29,7 +29,7 @@ Check whether a `samples/<name>.md` file already exists in the project and wheth
 
 ## Phase 1 — Plan
 
-Use the Skill tool to invoke the `resume-planner` skill. All user input from `$ARGUMENTS` and the conversation is available to it.
+Use the Skill tool to invoke the `resume-planner` skill. All user input from `$ARGUMENTS` and the conversation is available to it — including their own notes, old resumes, and any colleague resumes they've shared. The planner knows how to handle all of these.
 
 After the Content Map is produced:
 1. Show the full Content Map to the user.

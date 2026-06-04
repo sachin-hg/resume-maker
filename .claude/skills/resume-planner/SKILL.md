@@ -18,7 +18,33 @@ Arguments: `$ARGUMENTS`
 
 ## Step 1 — Ingest everything
 
-Read all content in `$ARGUMENTS` and in prior conversation messages. Do not assume the user has organized anything — they may not know what goes where.
+Read all content in `$ARGUMENTS` and in prior conversation messages. The user may provide any combination of:
+
+- **Their own notes or bio** — freeform, unstructured, anything
+- **Their own old resume** — extract all content as theirs; treat it as the baseline to build from, not copy from
+- **A colleague's resume** — the user has shared this because they worked closely on the same projects; use it to enrich shared project details only (see rules below)
+- **Any mix of the above** — identify each document type by its content and treat it accordingly
+
+### Rules for colleague resumes
+
+A colleague's resume is a reference document, not a source of personal content. Extract from it only what legitimately belongs to the user too:
+
+**Extract (shared project content):**
+- Project/product names, codenames, and technical descriptions of things they both worked on
+- Metrics and outcomes from shared projects — if the colleague's resume says "reduced load time 40%", the user can legitimately claim this for the same project if they contributed to it
+- Technology stack and architecture details for shared systems
+- Team size, company name, and timeline for overlapping roles
+
+**Do NOT extract (colleague's personal content):**
+- The colleague's name, contact info, title, or personal summary
+- Achievements that belong to the colleague specifically ("led a team of 10", "promoted to staff in 8 months") unless the user explicitly says they share that credit
+- Wording, phrasing, or bullets that describe the colleague's individual contribution — these must be rewritten to reflect the user's own angle and ownership
+
+**When metrics appear in a colleague's resume for a shared project:**
+- Flag these in the Content Map as "sourced from colleague resume — confirm with user before using"
+- They are likely valid (shared outcomes), but the user should confirm they can claim them
+
+**When in doubt:** Mark the content as "from colleague — verify ownership" rather than silently including or excluding it.
 
 ---
 
@@ -106,9 +132,12 @@ Raw content:
   - ...
 Numbers found: [any metrics, percentages, sizes, timeframes extracted from this role]
 AI/ML signal: yes / no  [does this role involve LLMs, agents, ML, RAG, etc.]
+Colleague-sourced content: [list any details pulled from a colleague's resume for shared projects, flagged for user confirmation]
 ```
 
 Most recent role first.
+
+If the user provided a colleague's resume and the colleague worked at the same company during an overlapping period, cross-reference the two. The colleague's resume may surface project names, metrics, or tech stack details that the user forgot to mention — these enrich the user's role description for their shared work.
 
 ---
 
@@ -123,14 +152,17 @@ Institution: [Name]  Year: [Year]  City: [City if found]
 
 #### Content → Section Mapping
 
-| Content snippet | Candidate section | Confidence | Notes |
-|---|---|---|---|
-| "won internal hackathon 2023" | achievements | high | standalone win |
-| "I love photography" | passions | high | non-work interest |
-| "AWS certified SAA 2022" | certifications | high | credential |
-| "mostly coding, some meetings" | mytime | medium | time split inferred |
-| "React, TypeScript, Vite" | skills | high | tech stack |
-| "built a RAG chatbot side project" | extra | high | doesn't fit a role |
+| Content snippet | Source | Candidate section | Confidence | Notes |
+|---|---|---|---|---|
+| "won internal hackathon 2023" | own | achievements | high | standalone win |
+| "I love photography" | own | passions | high | non-work interest |
+| "AWS certified SAA 2022" | own | certifications | high | credential |
+| "mostly coding, some meetings" | own | mytime | medium | time split inferred |
+| "React, TypeScript, Vite" | own | skills | high | tech stack |
+| "reduced load time 40%" | colleague resume | work bullet (Role X) | high | ⚠️ shared project metric — confirm ownership |
+| "Webpack 5 Module Federation" | colleague resume | skills + work context | high | shared tech stack — safe to include |
+
+**Source values:** `own` (user's own input), `own-resume` (user's old resume), `colleague` (sourced from a colleague's resume — flag for verification if it's a personal achievement or metric).
 
 (Include every piece of content found, including anything that maps to work bullets.)
 
