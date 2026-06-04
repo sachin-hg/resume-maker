@@ -16,6 +16,21 @@ Arguments: `$ARGUMENTS`
 
 ---
 
+## Step 0 — Is this a new resume or an update?
+
+Check whether a resume file has already been generated in this session or whether `$ARGUMENTS` or the conversation contains an update/feedback request (e.g. "change the summary", "reorder skills", "the Directi bullet is too long", "add my AWS cert", "I don't like how X looks").
+
+**If this is an update request:**
+1. Read the existing `samples/<name>.md` file.
+2. Identify exactly which parts the user wants changed. If the request is ambiguous, ask one focused clarifying question.
+3. Apply only the requested changes. Do not rewrite sections the user didn't mention.
+4. After patching, re-run the ATS and quality checklist (Step 4) across the full file — a local edit can break global balance (e.g. a new bullet that's too long, a reordered skills list that buries key terms, a summary that no longer matches updated experience).
+5. Write the updated file back to `samples/<name>.md` and tell the user what changed.
+
+**If this is a new resume:** proceed to Step 1.
+
+---
+
 ## Step 1 — Extract what you have
 
 Parse everything in `$ARGUMENTS` plus any prior messages in this conversation. Extract whatever is already present across these fields:
@@ -25,8 +40,8 @@ Parse everything in `$ARGUMENTS` plus any prior messages in this conversation. E
 - `work_experience` — at least one role with: title, company, period, and some description of what they did
 - `education` — at least one: degree, institution, year
 
-**Important (derive if missing, ask only if you truly cannot infer):**
-- `skills` — any technologies, tools, languages mentioned. You can derive these from their work experience if not explicitly listed.
+**Important (derive if missing, ask only if nothing is inferable):**
+- `skills` — any technologies, tools, languages mentioned anywhere in their input. Derive from work experience descriptions first. Only ask if the experience content is so vague that no skills can be inferred at all (e.g. "managed a team" with zero technical detail).
 
 **Optional (include if provided, never ask for):**
 - Contact: email, phone, location, LinkedIn, GitHub
@@ -82,7 +97,7 @@ Apply every rule below without exception.
 
 **Bullet writing rules (enforce strictly):**
 - Each bullet must fit on **at most 2 lines** when printed (≈ 110–120 chars including leading dash). Aim for 90–100 chars.
-- The entire resume should have **at most 2–3 bullets at 3 lines**; reserve these for the most impressive, number-rich achievements.
+- **3-line exception**: The entire resume may have at most 2–3 bullets that run to 3 lines. These are only justified when all three conditions hold: (a) the bullet is in the most recent or most significant role, (b) it contains multiple concrete metrics or a particularly complex achievement that would lose meaning if cut, and (c) no word can be removed without losing substance. Never use a 3-line bullet for context or description — only for dense, outcome-rich content.
 - Start with a strong past-tense verb: Built, Architected, Reduced, Increased, Shipped, Designed, Migrated, Eliminated, Automated, Optimized.
 - Lead with the **outcome or number** where possible: "Reduced bundle **60%** (300 → 125 KB) by…" not "Worked on bundle optimization that resulted in…"
 - Include at least one metric per role if the user provided any numbers.
