@@ -206,6 +206,140 @@ const TEMPLATE_DEFS = [
   },
 ]
 
+// ── Theme definitions ──────────────────────────────────────────────────────────
+const THEME_DEFS = [
+  {
+    id: 'default',
+    name: 'Classic',
+    desc: 'Teal · Original',
+    swatches: ['#1e2d3e', '#1a7a70', '#ffffff'],
+    vars: {},
+    typo: {},
+  },
+  {
+    id: 'corporate',
+    name: 'Corporate',
+    desc: 'Navy · Formal',
+    swatches: ['#1e3a5f', '#1e3a5f', '#f4f7fb'],
+    vars: {
+      '--th-page-bg': '#f4f7fb',
+      '--th-chip-bg': '#1e3a5f',
+      '--th-chip-color': '#ffffff',
+      '--th-chip-border': 'none',
+      '--th-chip-radius': '3px',
+      '--th-sec-rule-w': '1.5px',
+      '--th-job-sep-border': 'none',
+      '--th-job-sep-pb': '0',
+      '--th-job-sep-mb': '14px',
+    },
+    typo: {
+      headerBg:    { color: '#1e3a5f' },
+      accentColor: { color: '#1e3a5f' },
+      name:        { size: 36, bold: true,  italic: false, align: 'left', color: '#ffffff' },
+      title:       { size: 14, bold: false, italic: false, align: 'left', color: '#c0d4f0' },
+      sectionTitle:{ size: 13, bold: true,  italic: false, align: 'left', color: '#1e3a5f' },
+      jobTitle:    { size: 13.5, bold: true, italic: false, align: 'left', color: '#1e3a5f' },
+      jobCompany:  { size: 12, bold: true,  italic: false, align: 'left', color: '#333333' },
+      eduDegree:   { size: 13.5, bold: true, italic: false, align: 'left', color: '#1e3a5f' },
+      eduInst:     { size: 12, bold: false, italic: false, align: 'left', color: '#333333' },
+    },
+  },
+  {
+    id: 'fresh',
+    name: 'Fresh',
+    desc: 'Teal · Light · Clean',
+    swatches: ['#ffffff', '#009999', '#ffffff'],
+    vars: {
+      '--th-page-bg': '#ffffff',
+      '--th-chip-bg': 'transparent',
+      '--th-chip-color': '#009999',
+      '--th-chip-border': '1.5px solid #009999',
+      '--th-chip-radius': '3px',
+      '--th-sec-rule-w': '1px',
+      '--th-job-sep-border': '1px dashed #e0e0e0',
+      '--th-job-sep-pb': '10px',
+      '--th-job-sep-mb': '4px',
+    },
+    typo: {
+      headerBg:    { color: '#ffffff' },
+      accentColor: { color: '#009999' },
+      name:        { size: 36, bold: true,  italic: false, align: 'left', color: '#1a1a1a' },
+      title:       { size: 14, bold: false, italic: false, align: 'left', color: '#009999' },
+      summary:     { size: 12, bold: false, italic: false, align: 'justify', color: '#555555' },
+      sectionTitle:{ size: 12, bold: true,  italic: false, align: 'left', color: '#777777' },
+      skills:      { size: 11, bold: false, italic: false, align: 'left', color: '#009999' },
+      jobTitle:    { size: 13.5, bold: true, italic: false, align: 'left', color: '#222222' },
+      jobCompany:  { size: 12, bold: false, italic: false, align: 'left', color: '#009999' },
+      eduDegree:   { size: 13.5, bold: true, italic: false, align: 'left', color: '#222222' },
+      eduInst:     { size: 12, bold: false, italic: false, align: 'left', color: '#009999' },
+      achTitle:    { size: 13, bold: true,  italic: false, align: 'left', color: '#222222' },
+    },
+  },
+  {
+    id: 'bold',
+    name: 'Bold',
+    desc: 'Blue · Strong · Modern',
+    swatches: ['#ffffff', '#2c5f9e', '#ffffff'],
+    vars: {
+      '--th-page-bg': '#ffffff',
+      '--th-chip-bg': 'transparent',
+      '--th-chip-color': '#2c5f9e',
+      '--th-chip-border': '1.5px solid #2c5f9e',
+      '--th-chip-radius': '2px',
+      '--th-sec-rule-w': '2px',
+      '--th-job-sep-border': 'none',
+      '--th-job-sep-pb': '0',
+      '--th-job-sep-mb': '14px',
+    },
+    typo: {
+      headerBg:    { color: '#ffffff' },
+      accentColor: { color: '#2c5f9e' },
+      name:        { size: 40, bold: true,  italic: false, align: 'left', color: '#111111' },
+      title:       { size: 15, bold: true,  italic: false, align: 'left', color: '#2c5f9e' },
+      summary:     { size: 12, bold: false, italic: false, align: 'justify', color: '#444444' },
+      sectionTitle:{ size: 13, bold: true,  italic: false, align: 'left', color: '#111111' },
+      skills:      { size: 11, bold: false, italic: false, align: 'left', color: '#2c5f9e' },
+      jobTitle:    { size: 13.5, bold: true, italic: false, align: 'left', color: '#111111' },
+      jobCompany:  { size: 12, bold: false, italic: false, align: 'left', color: '#2c5f9e' },
+      eduDegree:   { size: 13.5, bold: true, italic: false, align: 'left', color: '#111111' },
+      eduInst:     { size: 12, bold: false, italic: false, align: 'left', color: '#2c5f9e' },
+      achTitle:    { size: 13, bold: true,  italic: false, align: 'left', color: '#111111' },
+    },
+  },
+  {
+    id: 'lavender',
+    name: 'Lavender',
+    desc: 'Soft · Blue · Airy',
+    swatches: ['#e8eef8', '#4a6fa5', '#edf1f9'],
+    vars: {
+      '--th-page-bg': '#edf1f9',
+      '--th-chip-bg': 'transparent',
+      '--th-chip-color': '#4a6fa5',
+      '--th-chip-border': '1.5px solid #4a6fa5',
+      '--th-chip-radius': '4px',
+      '--th-sec-rule-w': '1.5px',
+      '--th-job-sep-border': 'none',
+      '--th-job-sep-pb': '0',
+      '--th-job-sep-mb': '14px',
+      '--th-blob-display': 'block',
+    },
+    typo: {
+      headerBg:    { color: '#e8eef8' },
+      accentColor: { color: '#4a6fa5' },
+      name:        { size: 36, bold: true,  italic: false, align: 'left', color: '#1a1a1a' },
+      title:       { size: 14, bold: false, italic: false, align: 'left', color: '#4a6fa5' },
+      summary:     { size: 12, bold: false, italic: false, align: 'justify', color: '#555555' },
+      sectionTitle:{ size: 13, bold: true,  italic: false, align: 'left', color: '#4a6fa5' },
+      skills:      { size: 11, bold: false, italic: false, align: 'left', color: '#4a6fa5' },
+      jobTitle:    { size: 13.5, bold: true, italic: false, align: 'left', color: '#4a6fa5' },
+      jobCompany:  { size: 12, bold: false, italic: false, align: 'left', color: '#333333' },
+      eduDegree:   { size: 13.5, bold: true, italic: false, align: 'left', color: '#4a6fa5' },
+      eduInst:     { size: 12, bold: false, italic: false, align: 'left', color: '#333333' },
+      achTitle:    { size: 13, bold: true,  italic: false, align: 'left', color: '#333333' },
+    },
+  },
+]
+
 // ── Section type registry ──────────────────────────────────────────────────────
 const SECTION_TYPE_DEFS = {
   summary:        { label: 'Summary' },
@@ -945,6 +1079,62 @@ function TemplatePicker({ current, onSelect, onClose }) {
   )
 }
 
+// ── Theme Thumbnail ─────────────────────────────────────────────────────────
+function ThemeThumbnail({ theme }) {
+  const [headerBg, accent, pageBg] = theme.swatches
+  const isLight = headerBg === '#ffffff' || headerBg.startsWith('#e') || headerBg.startsWith('#f')
+  const nameColor = isLight ? '#1a1a1a' : '#ffffff'
+  const titleColor = isLight ? accent : 'rgba(255,255,255,0.8)'
+  const secColor = accent
+  const hasOutlinedChip = (theme.vars['--th-chip-bg'] === 'transparent')
+  return (
+    <div className="thm-thumb" style={{ background: pageBg }}>
+      <div className="thm-thumb-header" style={{ background: headerBg }}>
+        <div className="thm-thumb-name" style={{ background: nameColor }} />
+        <div className="thm-thumb-title" style={{ background: titleColor }} />
+      </div>
+      <div className="thm-thumb-body">
+        <div className="thm-thumb-sec" style={{ background: secColor }} />
+        <div className="thm-thumb-line" /><div className="thm-thumb-line short" />
+        <div className="thm-thumb-chips">
+          {[22, 16, 20].map((w, i) => (
+            <div key={i} className="thm-thumb-chip" style={{
+              width: w,
+              background: hasOutlinedChip ? 'transparent' : accent,
+              border: hasOutlinedChip ? `1px solid ${accent}` : 'none',
+            }} />
+          ))}
+        </div>
+        <div className="thm-thumb-line" /><div className="thm-thumb-line short" />
+      </div>
+    </div>
+  )
+}
+
+// ── Theme Picker ─────────────────────────────────────────────────────────────
+function ThemePicker({ current, onSelect, onClose }) {
+  return (
+    <div className="thm-overlay no-print">
+      <div className="thm-panel">
+        <div className="thm-panel-header">
+          <span>Choose Theme</span>
+          <button className="thm-close" onClick={onClose}>×</button>
+        </div>
+        <div className="thm-grid">
+          {THEME_DEFS.map(t => (
+            <button key={t.id} className={`thm-card${current === t.id ? ' thm-card-active' : ''}`}
+              onClick={() => { onSelect(t.id); onClose() }}>
+              <ThemeThumbnail theme={t} />
+              <div className="thm-card-name">{t.name}</div>
+              <div className="thm-card-desc">{t.desc}</div>
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 // ── Section Manager ────────────────────────────────────────────────────────────
 function SectionManager({ sectionOrder, columnAssignment, template, onAdd, onRemove, onMoveUp, onMoveDown, onColumnChange, onClose }) {
   const tplDef = TEMPLATE_DEFS.find(t => t.id === template) || TEMPLATE_DEFS[0]
@@ -1027,6 +1217,33 @@ export default function App() {
   const [showTemplatePicker, setShowTemplatePicker] = useState(false)
   const [showSectionManager, setShowSectionManager] = useState(false)
   const [sidebarSide, setSidebarSide] = useState(() => localStorage.getItem('resume-sidebar-side') || 'right')
+  const [theme, setTheme] = useState(() => localStorage.getItem('resume-theme') || 'default')
+  const [showThemePicker, setShowThemePicker] = useState(false)
+
+  // inject CSS vars when theme changes
+  useEffect(() => {
+    const def = THEME_DEFS.find(t => t.id === theme) || THEME_DEFS[0]
+    const root = document.documentElement
+    // reset all theme vars to defaults first
+    const ALL_VARS = ['--th-page-bg','--th-chip-bg','--th-chip-color','--th-chip-border',
+      '--th-chip-radius','--th-sec-rule-w','--th-job-sep-border','--th-job-sep-pb',
+      '--th-job-sep-mb','--th-blob-display']
+    ALL_VARS.forEach(v => root.style.removeProperty(v))
+    // apply theme vars
+    Object.entries(def.vars || {}).forEach(([k, v]) => root.style.setProperty(k, v))
+    localStorage.setItem('resume-theme', theme)
+  }, [theme])
+
+  const applyTheme = useCallback((id) => {
+    const def = THEME_DEFS.find(t => t.id === id) || THEME_DEFS[0]
+    setTheme(id)
+    // merge theme typo overrides onto DEFAULT_TYPO
+    const merged = { ...DEFAULT_TYPO }
+    Object.entries(def.typo || {}).forEach(([k, v]) => {
+      merged[k] = { ...DEFAULT_TYPO[k], ...v }
+    })
+    setTypo(merged)
+  }, [])
 
   function getDefaultColumns(tplId) {
     const tpl = TEMPLATE_DEFS.find(t => t.id === tplId) || TEMPLATE_DEFS[0]
@@ -1394,7 +1611,7 @@ export default function App() {
             {data.skills.map((skill, i) => (
               <span key={i}
                 className={`skill-tag${dragSk === i ? ' sk-drag' : ''}${dragSkOver === i && dragSk !== i ? ' sk-over' : ''}`}
-                style={{ background: typo.headerBg.color }}
+                style={{ background: 'var(--th-chip-bg)', color: 'var(--th-chip-color)' }}
                 onDragOver={e => { e.preventDefault(); setDragSkOver(i) }}
                 onDragLeave={() => setDragSkOver(null)}
                 onDrop={e => { e.preventDefault(); if (dragSk !== null && dragSk !== i) reorderSkill(dragSk, i); setDragSk(null); setDragSkOver(null) }}
@@ -2020,6 +2237,7 @@ export default function App() {
     <div className="page-bg" onClick={e => {
       if (e.target.closest('.tpl-overlay') === null) setShowTemplatePicker(false)
       if (e.target.closest('.sm-overlay') === null) setShowSectionManager(false)
+      if (e.target.closest('.thm-overlay') === null) setShowThemePicker(false)
     }}>
       <FormattingToolbar />
 
@@ -2028,6 +2246,14 @@ export default function App() {
           current={template}
           onSelect={handleSelectTemplate}
           onClose={() => setShowTemplatePicker(false)}
+        />
+      )}
+
+      {showThemePicker && (
+        <ThemePicker
+          current={theme}
+          onSelect={applyTheme}
+          onClose={() => setShowThemePicker(false)}
         />
       )}
 
@@ -2069,13 +2295,19 @@ export default function App() {
         <div className="toolbar-actions">
           <button
             className={`btn-tpl${showTemplatePicker ? ' btn-tpl-active' : ''}`}
-            onClick={e => { e.stopPropagation(); setShowTemplatePicker(v => !v); setShowSectionManager(false) }}
+            onClick={e => { e.stopPropagation(); setShowTemplatePicker(v => !v); setShowSectionManager(false); setShowThemePicker(false) }}
           >
             ◫ Layout
           </button>
           <button
+            className={`btn-tpl${showThemePicker ? ' btn-tpl-active' : ''}`}
+            onClick={e => { e.stopPropagation(); setShowThemePicker(v => !v); setShowTemplatePicker(false); setShowSectionManager(false) }}
+          >
+            ◑ Theme
+          </button>
+          <button
             className={`btn-sections${showSectionManager ? ' btn-sections-active' : ''}`}
-            onClick={e => { e.stopPropagation(); setShowSectionManager(v => !v); setShowTemplatePicker(false) }}
+            onClick={e => { e.stopPropagation(); setShowSectionManager(v => !v); setShowTemplatePicker(false); setShowThemePicker(false) }}
           >
             ☰ Sections
           </button>
@@ -2122,6 +2354,8 @@ export default function App() {
         (isMultiCol) ? { background: '#f0f2f5' } :
         {}
       }>
+        <div className="theme-blob theme-blob-1 no-print" />
+        <div className="theme-blob theme-blob-2 no-print" />
         {isSidebarDark && renderSidebarDark()}
         {isThreeCol && renderThreeCol()}
         {isSidebarBand && renderSidebarBand()}

@@ -1,3 +1,17 @@
+/* ── Theme custom properties (defaults match Classic/Default theme) ── */
+:root {
+  --th-page-bg: #ffffff;
+  --th-chip-bg: #1e2d3e;
+  --th-chip-color: #ffffff;
+  --th-chip-border: none;
+  --th-chip-radius: 4px;
+  --th-sec-rule-w: 1.5px;
+  --th-job-sep-border: none;
+  --th-job-sep-pb: 0px;
+  --th-job-sep-mb: 14px;
+  --th-blob-display: none;
+}
+
 /* ── Reset & base ── */
 *, *::before, *::after { box-sizing: border-box; }
 
@@ -135,6 +149,62 @@ kbd {
 .tt-line.tt-sd-line { background: rgba(255,255,255,0.25); }
 .tt-main-white { flex: 1; padding: 5px 6px; display: flex; flex-direction: column; gap: 2px; }
 
+/* ── Theme Picker overlay ── */
+.thm-overlay {
+  position: fixed; top: 46px; left: 50%; transform: translateX(-50%);
+  z-index: 200;
+}
+.thm-panel {
+  background: #1a2535; border: 1px solid #2e4255; border-radius: 8px;
+  padding: 14px; box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  min-width: 380px;
+}
+.thm-panel-header {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px; color: #8aabb0; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase;
+}
+.thm-close {
+  background: none; border: none; color: #667788; cursor: pointer;
+  font-size: 16px; line-height: 1; padding: 0; font-family: inherit;
+}
+.thm-close:hover { color: #aaa; }
+.thm-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;
+}
+.thm-card {
+  background: #1e2e40; border: 2px solid #2e3e50; border-radius: 6px;
+  padding: 8px 6px 6px; cursor: pointer; text-align: center;
+  transition: border-color 0.15s; font-family: inherit;
+}
+.thm-card:hover { border-color: #5a8aaa; }
+.thm-card-active { border-color: #3a8adf !important; background: #1a2e4a !important; }
+.thm-card-name { font-size: 11px; font-weight: 600; color: #aac; margin-top: 6px; }
+.thm-card-desc { font-size: 9px; color: #667; margin-top: 2px; }
+.thm-swatch-row { display: flex; gap: 2px; justify-content: center; }
+.thm-swatch {
+  width: 14px; height: 14px; border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+/* Mini resume thumbnail for theme */
+.thm-thumb {
+  width: 100%; aspect-ratio: 0.707; border-radius: 3px; overflow: hidden;
+  display: flex; flex-direction: column; position: relative;
+}
+.thm-thumb-header {
+  height: 28%; flex-shrink: 0;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 3px 4px 2px;
+}
+.thm-thumb-name { height: 5px; border-radius: 1px; width: 70%; margin-bottom: 2px; }
+.thm-thumb-title { height: 3px; border-radius: 1px; width: 55%; opacity: 0.7; }
+.thm-thumb-body { flex: 1; padding: 3px 4px; display: flex; flex-direction: column; gap: 2px; }
+.thm-thumb-sec { height: 3px; border-radius: 1px; width: 40%; margin-bottom: 1px; }
+.thm-thumb-line { height: 1.5px; border-radius: 1px; background: #ddd; }
+.thm-thumb-line.short { width: 70%; }
+.thm-thumb-chips { display: flex; gap: 1px; margin-top: 1px; }
+.thm-thumb-chip { height: 5px; width: 16px; border-radius: 1px; }
+
 /* ── Section Manager ── */
 .sm-overlay {
   position: fixed; top: 46px; right: 20px; z-index: 200;
@@ -199,7 +269,7 @@ kbd {
 /* ── Section title row ── */
 .section-title-row {
   display: flex; align-items: center; gap: 6px;
-  border-bottom: 1.5px solid #333; padding-bottom: 4px; margin-bottom: 10px;
+  border-bottom-width: var(--th-sec-rule-w, 1.5px); border-bottom-style: solid; padding-bottom: 4px; margin-bottom: 10px;
 }
 .section-title.st-inline {
   flex: 1; border-bottom: none; margin-bottom: 0; padding-bottom: 0;
@@ -344,9 +414,10 @@ kbd {
 
 /* ── Resume wrapper (A4) ── */
 .resume {
-  width: 210mm; min-height: 297mm; background: #fff;
+  width: 210mm; min-height: 297mm; background: var(--th-page-bg, #fff);
   box-shadow: 0 4px 28px rgba(0,0,0,0.28);
   display: flex; flex-direction: column; font-size: 12.5px;
+  position: relative; overflow: hidden;
 }
 /* Print: remove box-shadow, ensure full height */
 @media print {
@@ -354,6 +425,28 @@ kbd {
   .resume-two-col, .resume-sdark { min-height: 100%; }
   .two-col-main, .two-col-sidebar, .sdark-sidebar, .sdark-main { min-height: 100vh; }
 }
+
+/* ── Theme blobs (decorative background elements) ── */
+.theme-blob {
+  display: var(--th-blob-display, none);
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.theme-blob-1 {
+  width: 320px; height: 320px;
+  background: rgba(74, 111, 165, 0.12);
+  border-radius: 50%;
+  top: -80px; right: -80px;
+}
+.theme-blob-2 {
+  width: 180px; height: 180px;
+  background: rgba(74, 111, 165, 0.08);
+  border-radius: 50%;
+  bottom: 60px; left: -60px;
+}
+/* ensure resume content sits above blobs */
+.resume > *:not(.theme-blob) { position: relative; z-index: 1; }
 
 /* ── HEADER — Classic / Two-col dark ── */
 .rh {
@@ -496,12 +589,16 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 }
 .skill-tag {
   display: inline-flex; align-items: center; gap: 2px;
-  background: #1e2d3e; color: #fff; padding: 4px 9px;
-  font-size: 11px; border-radius: 4px;
+  background: var(--th-chip-bg, #1e2d3e);
+  color: var(--th-chip-color, #fff);
+  border: var(--th-chip-border, none);
+  padding: 4px 9px;
+  font-size: 11px;
+  border-radius: var(--th-chip-radius, 4px);
 }
 .skill-remove {
   background: none; border: none; cursor: pointer;
-  color: rgba(255,255,255,0.45); font-size: 13px;
+  opacity: 0.45; color: var(--th-chip-color, #fff); font-size: 13px;
   padding: 0 0 0 1px; line-height: 1; font-family: inherit;
 }
 .skill-remove:hover { color: #ff8080; }
@@ -513,7 +610,12 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 .btn-add-skill:hover { border-color: #3d4248; color: #3d4248; }
 
 /* ── Work experience ── */
-.job-entry { margin-bottom: 14px; }
+.job-entry {
+  margin-bottom: var(--th-job-sep-mb, 14px);
+  border-bottom: var(--th-job-sep-border, none);
+  padding-bottom: var(--th-job-sep-pb, 0);
+}
+.job-entry:last-of-type { border-bottom: none; padding-bottom: 0; }
 .job-header-row { display: flex; align-items: baseline; gap: 6px; }
 .job-title {
   font-size: 13.5px; font-weight: 700; color: #1a7a70;
