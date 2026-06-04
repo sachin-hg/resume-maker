@@ -43,15 +43,15 @@ Parse everything in `$ARGUMENTS` plus any prior messages in this conversation. E
 **Important (derive if missing, ask only if nothing is inferable):**
 - `skills` — any technologies, tools, languages mentioned anywhere in their input. Derive from work experience descriptions first. Only ask if the experience content is so vague that no skills can be inferred at all (e.g. "managed a team" with zero technical detail).
 
-**Optional (include if provided, never ask for):**
-- Contact: email, phone, location, LinkedIn, GitHub
-- Key achievements
-- Languages
-- Certifications
-- Courses
-- Passions & Interests
-- My Time
-- Any custom section
+**Optional (actively derive from the raw input — never ask for these, but extract any signal that's there):**
+- Contact: email, phone, location, LinkedIn URL/handle, GitHub URL/handle — extract if mentioned anywhere in the text
+- Key achievements: standalone wins, awards, promotions, record-breaking numbers mentioned outside a specific role context (e.g. "won internal hackathon", "promoted in 8 months", "top performer Q3")
+- Languages: any mention of speaking, knowing, or being native to a language
+- Certifications: any credential, exam, or cert mentioned (e.g. "I got AWS certified", "passed CKA", "hold a PMP")
+- Courses: any mention of completing a course, MOOC, bootcamp, or training
+- Passions & Interests: anything they say they love, enjoy, or care about outside work — photography, music, open source, running, etc.
+- My Time: if they mention how they typically split their day/week, derive relative integer weights (e.g. "mostly coding, some meetings" → `Coding | 4`, `Meetings | 1`)
+- Custom section: if there is a coherent cluster of content that doesn't fit any standard section (e.g. "AI Projects", "Side Projects", "Publications"), create a custom section for it
 
 ---
 
