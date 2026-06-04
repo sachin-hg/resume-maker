@@ -44,10 +44,19 @@ Claude will run the full pipeline automatically (Plan → Layout → Write) with
 
 **What you can provide as input:**
 
-- Your own notes, bio, or bullet dump in any format
-- Your old resume (Claude extracts and modernises it)
+- Your own notes, bio, or bullet dump — freeform, any structure
+- Your old resume — Claude extracts and modernises it
 - A colleague's resume — Claude cross-references it for shared project details and metrics, flagging anything you need to confirm before claiming
-- Any combination of the above — paste everything, Claude figures out what belongs to you
+- Any combination of the above
+
+**Supported input formats — mix and match freely:**
+
+| Format | How to provide |
+|---|---|
+| Plain text | Paste directly into the prompt |
+| Image (screenshot or photo of a resume) | Attach the image to your message |
+| PDF | Provide the file path or attach the file |
+| `.md` file (from this app or any markdown resume) | Provide the file path — Claude reads and parses it |
 
 **After the file is written:**
 

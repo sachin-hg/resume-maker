@@ -21,9 +21,36 @@ Arguments: `$ARGUMENTS`
 Read all content in `$ARGUMENTS` and in prior conversation messages. The user may provide any combination of:
 
 - **Their own notes or bio** — freeform, unstructured, anything
-- **Their own old resume** — extract all content as theirs; treat it as the baseline to build from, not copy from
-- **A colleague's resume** — the user has shared this because they worked closely on the same projects; use it to enrich shared project details only (see rules below)
-- **Any mix of the above** — identify each document type by its content and treat it accordingly
+- **Their own old resume** — extract all content as theirs; treat it as the baseline to build from, not a verbatim copy
+- **A colleague's resume** — shared to cross-reference projects they worked on together; use for shared project details only (see rules below)
+- **Any mix of the above, in any of these formats:**
+
+### Handling input formats
+
+**Inline pasted text** — most common. Read directly from the conversation. No special handling needed.
+
+**Image (screenshot or photo of a resume)** — Claude can read images. Extract all visible text: job titles, company names, periods, bullet points, skills, education, contact details. Treat illegible or ambiguous text as missing and flag it. Do not guess at text you cannot clearly read.
+
+**PDF** — use the Read tool to open the file path if provided. Extract content from all pages. PDFs from this resume maker or standard resume tools will have clear structure; scanned PDFs may have less reliable text — note any extraction uncertainty.
+
+**Old `.md` file** (from this resume maker or any markdown resume) — use the Read tool to open it. If it follows this app's format (sections starting with `##`, work roles with `###`, pipe-separated items), parse it using the known schema:
+- `# Name` → name
+- Line 2 → title, Line 3 → summary
+- `## Contact` → contact fields (`key: value`)
+- `## Skills` → comma-separated skills line
+- `## Work Experience` → `### Role` blocks with `Company · Period` and `- bullets`
+- `## Education` → `### Degree` blocks
+- `## Key Achievements` → `Title | Description` lines
+- `## Languages` → `Name | Level | Rating` lines
+- `## Courses` → `Title | Provider | Year | Description` lines
+- `## Passions & Interests` → `Icon | Title | Description` lines
+- `## Certifications` → `Title | Issuer | Date` lines
+- `## My Time` → `Label | Value` lines
+- Any other `##` heading → custom/extra section items
+
+If the `.md` file was exported from this app it may begin with `<!-- typo:{...} -->` — ignore that line, it contains only UI typography settings.
+
+**Multiple files/formats at once** — identify each document by its content and format, apply the appropriate extraction method to each, then merge into a single content pool before classifying into sections.
 
 ### Rules for colleague resumes
 
