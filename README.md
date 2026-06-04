@@ -24,6 +24,100 @@ Drop a `.md` file into `samples/`. It will appear in the sample picker inside th
 
 ---
 
+## Generating a resume with Claude Code
+
+This project ships with Claude Code skills that turn raw, unstructured input into a polished, ATS-friendly `.md` file ready to load into the app.
+
+### Prerequisites
+
+[Claude Code](https://claude.ai/code) must be installed and running inside this project directory.
+
+### The quick path — `/generate-resume`
+
+Run this from the Claude Code prompt when you're in the project directory:
+
+```
+/generate-resume
+```
+
+Claude will run the full pipeline automatically (Plan → Layout → Write) with checkpoints between each phase where you can review and redirect. Just paste your raw content — notes, LinkedIn text, old CV, anything — and Claude structures it.
+
+**What you can provide as input:**
+
+- Your own notes, bio, or bullet dump in any format
+- Your old resume (Claude extracts and modernises it)
+- A colleague's resume — Claude cross-references it for shared project details and metrics, flagging anything you need to confirm before claiming
+- Any combination of the above — paste everything, Claude figures out what belongs to you
+
+**After the file is written:**
+
+1. Refresh the browser at `http://localhost:5173`
+2. Select your resume from the sample picker
+3. Select the layout template Claude recommended (shown in the report)
+4. Edit inline, pick a template, print or export
+
+---
+
+### The three-skill pipeline (for more control)
+
+Run each skill separately when you want to review and adjust decisions at each stage before committing to the next.
+
+#### Step 1 — `/resume-planner`
+
+```
+/resume-planner [paste your raw content here, or just run it and Claude will ask]
+```
+
+Extracts all content from your input, classifies each piece into candidate sections, estimates page volume, and flags what's missing. Produces a **Content Map** — a structured breakdown you can review before any layout decisions are made.
+
+#### Step 2 — `/resume-layout`
+
+```
+/resume-layout
+```
+
+Reads the Content Map from Step 1. Selects the best template from the six available layouts, assigns each section to a column, and computes per-section formatting budgets (bullet counts, character limits) to ensure the resume fits in 1–1.5 pages. Produces a **Layout Plan**.
+
+#### Step 3 — `/resume-writer`
+
+```
+/resume-writer
+```
+
+Reads the Content Map and Layout Plan. Writes every section to exact spec — outcome-first bullets, metrics bolded, ATS checklist enforced — and outputs the final `.md` file to `samples/<name>.md`.
+
+---
+
+### Updating a resume
+
+At any point, tell Claude what you want to change — in plain language, from the same Claude Code session:
+
+```
+the second bullet in the Directi role is too long, tighten it
+add my AWS cert from 2023
+reorder skills — TypeScript should come before React
+I don't like the summary, rewrite it
+```
+
+Claude reads the existing file, applies only the requested change, re-runs the quality checklist across the full file, and writes it back.
+
+---
+
+### Supported layouts
+
+Six templates are available in the app UI. Claude picks the best one for your content volume during `/resume-layout`, but you can always switch in the browser.
+
+| Template | Best for |
+|---|---|
+| **Classic** | Dense work history, few optional sections, single column |
+| **Minimal** | Clean look, early-career, academic, conservative fields |
+| **Two Column** | Most mid-to-senior engineers — work in main, skills/achievements in sidebar |
+| **Dark Sidebar** | Senior engineers with a strong skills list and substantial summary |
+| **Three Column** | Rich profiles — many optional sections across languages, certs, courses, projects |
+| **Sidebar + Band** | Multilingual engineers or those with many certifications; clear three-tier layout |
+
+---
+
 ## Sample `.md` format
 
 The parser reads a structured Markdown file. All sections are optional except the name.
