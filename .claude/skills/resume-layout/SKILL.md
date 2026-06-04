@@ -1,6 +1,6 @@
 ---
 name: resume-layout
-description: Second step of the three-skill resume pipeline. Takes the Content Map produced by /resume-planner, selects the best template and column layout from the resume maker's supported options, estimates page fit, allocates a space budget per section, and produces a Layout Plan for /resume-writer. Run after /resume-planner.
+description: Second step of the three-skill resume pipeline. Takes the Content Map produced by /resume-planner, selects the best template and column layout from the resume maker's supported options, estimates page fit, allocates a space budget per section, and produces a Layout Plan for /resume-writer. Called automatically by /generate-resume (the orchestrator); also invocable standalone when you want to control layout decisions before writing.
 user-invocable: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: resume-planner
-description: First step of the three-skill resume pipeline. Takes raw, unstructured user input (any format — LinkedIn dump, notes, CV paste, verbal bio) and produces a structured Content Map showing what content was found, which section each piece belongs to, and what is missing. Run this before /resume-layout.
+description: First step of the three-skill resume pipeline. Takes raw, unstructured user input (any format — LinkedIn dump, notes, CV paste, verbal bio) and produces a structured Content Map showing what content was found, which section each piece belongs to, and what is missing. Called automatically by /generate-resume (the orchestrator); also invocable standalone when you want to see the content plan before committing to a layout.
 user-invocable: true
 ---
 

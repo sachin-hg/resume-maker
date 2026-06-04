@@ -1,6 +1,6 @@
 ---
 name: resume-writer
-description: Third step of the three-skill resume pipeline. Takes the Content Map from /resume-planner and the Layout Plan from /resume-layout, then writes the final .md file formatted to exact per-section word/bullet/character budgets. Run after /resume-layout.
+description: Third step of the three-skill resume pipeline. Takes the Content Map from /resume-planner and the Layout Plan from /resume-layout, then writes the final .md file formatted to exact per-section word/bullet/character budgets. Called automatically by /generate-resume (the orchestrator); also invocable standalone for re-writing or patching an existing file. Enforces strict compatibility with the resume maker's markdown parser.
 user-invocable: true
 ---
 
@@ -139,11 +139,95 @@ If any check fails, fix it before writing the file.
 
 ---
 
-## Step 4 — Write the file
+## Step 4 — Compatibility requirements (read before writing)
+
+The app parser (`parseMd` in `src/App.jsx`) has strict expectations. Violating any of these means the section silently fails to load. Verify every rule before writing the file.
+
+### Header block
+- Line 1: `# Full Name` — the H1 heading. Everything after `# ` is the name.
+- Line 2: Title line — any plain text. Becomes the job title displayed in the header.
+- Line 3: Summary line — any plain text. Becomes the summary. **There is no `## Summary` section** — the summary always comes from this third line position.
+- Empty lines between these are skipped by the parser, but keep them together for readability.
+
+### Section headings — exact matches (case-insensitive)
+Only these headings are recognised as named sections. Any other `## Heading` becomes the single custom/extra section.
+
+| Write this | Parses as |
+|---|---|
+| `## Contact` | contact |
+| `## Skills` | skills |
+| `## Work Experience` | work |
+| `## Education` | education |
+| `## Key Achievements` or `## Achievements` | achievements |
+| `## Languages` | languages |
+| `## Courses` | courses |
+| `## Passions & Interests` or `## Passions` | passions |
+| `## Certifications` | certifications |
+| `## My Time` | mytime |
+| Any other `## Heading` | extra/custom section |
+
+### Critical: the middle dot separator `·`
+The parser checks for `·` (Unicode U+00B7, the middle dot) — **not** a hyphen `-`, en dash `–`, or em dash `—`.
+
+- **Work company/period line**: `Company Name · Month Year – Month Year`
+  - Parser splits on the FIRST `·`: left = company, right = period.
+  - If `·` is absent, the line is treated as the role `description` field instead.
+  - The period range itself can use `–` (en dash) — that's fine. Only the company/period separator must be `·`.
+- **Education institution line**: `Institution · Year · City`
+  - Parser splits all `·`: parts[0]=institution, parts[1]=year, parts[2]=city.
+
+Always copy-paste `·` or write it explicitly — do not substitute.
+
+### Skills section
+- Must be **exactly one comma-separated line**.
+- The parser reads the first non-empty line in the skills section and splits by comma.
+- A second line of skills would be ignored entirely.
+
+### Pipe-separated sections
+All of these use `|` as the field separator. The parser splits all `|` characters. Extra whitespace around `|` is trimmed.
+
+| Section | Format | Notes |
+|---|---|---|
+| Achievements | `Title \| Description` | Splits on FIRST `\|`; title is everything before, description everything after |
+| Languages | `Name \| Level \| Rating` | Rating is parsed as integer 0–5 |
+| Courses | `Title \| Provider \| Year \| Description` | All four parts; year and description can be empty strings |
+| Passions | `Icon \| Title \| Description` | Icon must be one of the valid icon keys (see below) |
+| Certifications | `Title \| Issuer \| Date` | Date can be a year string or empty |
+| My Time | `Label \| Value` | Value parsed as integer; use relative weights |
+| Extra/custom | `Title \| Description` | Splits on FIRST `\|` |
+
+**Valid passion icons:** `star`, `heart`, `code`, `lightning`, `trophy`, `target`, `book`, `user`, `globe`, `music`, `idea`
+Any unrecognised icon defaults to `star`.
+
+### Only ONE extra/custom section
+The parser resets the extra section every time it hits an unrecognised `## Heading`. **If you write two custom sections, only the last one loads.** 
+
+If the Content Map has two clusters that belong in custom sections (e.g. "AI Projects" and "Side Projects"), merge them into one section under the more prominent title. Use a clear title like `## AI & Side Projects`.
+
+### Section order = UI order
+Sections are added to the app's `sectionOrder` array in the order they appear in the file. The order in the file determines the within-column order in the UI. Write sections in the order the Layout Plan specifies.
+
+### Inline formatting in bullets
+- `**bold text**` renders as bold — use for the key metric or outcome, once per bullet.
+- `*italic text*` renders as italic — use sparingly.
+- Both are supported inside work bullets, achievement descriptions, and extra section descriptions.
+- Do NOT use them in section headings, company/period lines, or the title/summary header lines.
+
+### File location
+- Write to `samples/<firstname-lowercase>.md` relative to the project root.
+- The app auto-discovers all `.md` files in `samples/` via `import.meta.glob` — no registration needed.
+- After writing, the user refreshes the browser and selects the sample from the dropdown.
+
+### Do NOT include a typography comment
+Do not add `<!-- typo:{...} -->` as the first line. This comment is only present in files exported from the app to preserve UI typography settings. Generated files should start with `# Full Name`.
+
+---
+
+## Step 5 — Write the file
 
 Write to `samples/<firstname-lowercase>.md` using the exact format below.
 
-Omit any section not present in the Content Map. Section order within each column follows the Layout Plan.
+Omit any section not present in the Content Map. Write sections in the order specified by the Layout Plan (this determines their order in the UI).
 
 ```
 # Full Name
