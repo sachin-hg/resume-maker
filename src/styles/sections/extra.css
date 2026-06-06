@@ -1,0 +1,39 @@
+/* ── Skills rated mode ── */
+.skills-rated { display: flex; flex-direction: column; }
+.skills-rated-row {
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 0; border-bottom: 1px solid #f2f2f2;
+}
+.skills-rated-row:last-of-type { border-bottom: none; }
+.skill-rated-name { flex: 1; font-size: 12px; }
+.btn-mode-toggle {
+  background: none; border: 1px solid #ddd; color: #999;
+  font-size: 10px; padding: 1px 6px; border-radius: 3px;
+  cursor: pointer; font-family: inherit; white-space: nowrap; flex-shrink: 0;
+}
+.btn-mode-toggle:hover { border-color: #999; color: #555; }
+
+/* ── Extra / Custom Sections ── */
+.extra-title-row {
+  display: flex; align-items: center; gap: 6px;
+  border-bottom-width: var(--th-sec-rule-w, 1.5px); border-bottom-style: solid;
+  padding-bottom: 4px; margin-bottom: 10px;
+}
+.extra-section-title { flex: 1; border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.btn-remove-section {
+  background: none; border: 1px solid #e0e0e0; color: #bbb;
+  font-size: 10px; padding: 2px 7px; border-radius: 2px; cursor: pointer;
+  white-space: nowrap; flex-shrink: 0; margin-top: 2px; font-family: inherit;
+}
+.btn-remove-section:hover { border-color: #c0392b; color: #c0392b; }
+.extra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 28px; }
+.extra-grid.extra-grid-single { grid-template-columns: 1fr; }
+.extra-item-row { display: flex; align-items: flex-start; gap: 4px; }
+.extra-item-title {
+  font-size: 13px; font-weight: 600; color: #222;
+  margin: 0 0 1px; flex: 1; display: block;
+}
+.extra-item-desc {
+  font-style: italic; font-size: 11.5px; color: #555;
+  display: block; line-height: 1.4;
+}

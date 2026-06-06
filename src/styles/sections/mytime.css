@@ -1,0 +1,16 @@
+/* ── Donut / My Time ── */
+.donut-wrap { display: flex; flex-direction: column; align-items: center; padding: 6px 0; flex-shrink: 0; }
+.donut-legend-row { display: flex; align-items: center; gap: 8px; }
+.donut-legend-dot {
+  width: 18px; height: 18px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center;
+  color: #fff; font-size: 8px; font-weight: 700; flex-shrink: 0;
+}
+.donut-legend-text { font-size: 11px; color: #444; flex: 1; }
+.donut-empty { font-size: 11px; color: #bbb; font-style: italic; padding: 8px 0; }
+.mytime-legend { display: flex; flex-direction: column; gap: 6px; justify-content: center; flex: 1; min-width: 0; }
+.mytime-val-input {
+  width: 32px; font-size: 10px; text-align: center;
+  border: 1px solid #ddd; border-radius: 3px; padding: 1px 3px;
+  color: #888; flex-shrink: 0;
+}

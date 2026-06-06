@@ -1,0 +1,23 @@
+/* ── Theme custom properties (defaults match Classic/Default theme) ── */
+:root {
+  --th-page-bg: #ffffff;
+  --th-chip-bg: #1e2d3e;
+  --th-chip-color: #ffffff;
+  --th-chip-border: none;
+  --th-chip-radius: 4px;
+  --th-sec-rule-w: 1.5px;
+  --th-job-sep-border: none;
+  --th-job-sep-pb: 0px;
+  --th-job-sep-mb: 14px;
+  --th-blob-display: none;
+  --th-blob-color-1: rgba(74,111,165,0.12);
+  --th-blob-color-2: rgba(74,111,165,0.08);
+  --th-arc-color-1: transparent;
+  --th-arc-color-2: transparent;
+  --th-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  --th-photo-radius: 50%;
+  --th-accent: #1a7a70;
+  --th-accent2: #1a7a70;
+  --th-badge-color: #1a7a70;
+  --th-title-bg: transparent;
+}

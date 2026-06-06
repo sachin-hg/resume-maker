@@ -1,0 +1,44 @@
+/* ── Section badge (resume-badge class on .resume) ── */
+.resume-badge .section-title-row {
+  position: relative;
+  padding-left: 26px;
+}
+.resume-badge .section-title-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--th-badge-color, var(--th-accent, #2a9d5c));
+  border-radius: 3px;
+}
+/* badge in dark sidebars: use lighter tint */
+.resume-badge .sdark-sidebar .section-title-row::before,
+.resume-badge .sb-sidebar .section-title-row::before,
+.resume-badge .three-col-left .section-title-row::before {
+  background: rgba(255,255,255,0.25);
+}
+/* badge with no section rule — give section title a bottom margin instead */
+.resume-badge .section-title-row { margin-bottom: 8px; }
+
+/* extend badge to also cover extra-title-row (custom sections) */
+.resume-badge .extra-title-row {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 8px;
+}
+.resume-badge .extra-title-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 2px;
+  width: 16px; height: 16px;
+  background: var(--th-badge-color, var(--th-accent, #2a9d5c));
+  border-radius: 3px;
+}
+.resume-badge .sdark-sidebar .extra-title-row::before,
+.resume-badge .sb-sidebar .extra-title-row::before,
+.resume-badge .three-col-left .extra-title-row::before {
+  background: rgba(255,255,255,0.25);
+}

@@ -1,0 +1,19 @@
+/* ── Chip underline style ── */
+.resume-chip-underline .skill-tag {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 2px 5px 2px 0 !important;
+  border-bottom: 1.5px solid var(--th-accent, #009999) !important;
+}
+.resume-chip-underline .sdark-sidebar .skill-tag,
+.resume-chip-underline .sb-sidebar .skill-tag,
+.resume-chip-underline .three-col-left .skill-tag {
+  border-bottom-color: rgba(255,255,255,0.45) !important;
+  color: rgba(255,255,255,0.85) !important;
+}
+.resume-chip-underline .sdark-sidebar.sdark-light .skill-tag,
+.resume-chip-underline .sb-sidebar.sb-light .skill-tag {
+  border-bottom-color: var(--th-accent, #009999) !important;
+  color: #333 !important;
+}

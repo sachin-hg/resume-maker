@@ -1,0 +1,26 @@
+/* ── Print ── */
+@media print {
+  html, body { margin: 0; padding: 0; background: #fff !important; }
+  .page-bg { padding: 0 !important; background: none !important; min-height: 0 !important; display: block !important; align-items: unset !important; }
+  .resume { width: 100% !important; min-height: 0 !important; box-shadow: none !important; margin: 0 !important; }
+  .no-print { display: none !important; }
+  .sk-handle, .bu-handle { display: none !important; }
+  [draggable] { cursor: default !important; }
+  .e { cursor: default !important; }
+  .e:hover, .e:focus { background: transparent !important; outline: none !important; }
+  .job-entry { break-inside: avoid; page-break-inside: avoid; }
+  .job-header-row { break-after: avoid; page-break-after: avoid; }
+  .job-desc { break-after: avoid; page-break-after: avoid; }
+  .bullet-row { break-inside: avoid; page-break-inside: avoid; }
+  .extra-item { break-inside: avoid; page-break-inside: avoid; }
+  .edu-entry { break-inside: avoid; page-break-inside: avoid; }
+  .ach-item { break-inside: avoid; page-break-inside: avoid; }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    color-adjust: exact !important;
+  }
+}
+
+@page { size: A4; margin: 16mm 0 14mm 0; }
+@page :first { margin-top: 0; }

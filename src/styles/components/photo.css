@@ -1,0 +1,3 @@
+/* ── Photo shape ── */
+.photo-img { border-radius: var(--th-photo-radius, 50%); }
+.sdark-photo { border-radius: var(--th-photo-radius, 50%) !important; }

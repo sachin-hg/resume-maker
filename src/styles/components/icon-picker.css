@@ -1,0 +1,23 @@
+/* ── Icon picker ── */
+.icon-picker { display: inline-flex; align-items: center; }
+.icon-picker-btn {
+  background: none; border: 1px dashed #ccc; border-radius: 3px;
+  padding: 1px 4px; cursor: pointer; width: 24px; height: 22px;
+  display: flex; align-items: center; justify-content: center;
+  margin-left: 4px;
+}
+.icon-picker-btn:hover { border-color: #999; }
+.icon-picker-popup {
+  position: absolute; top: 26px; left: 0; z-index: 60;
+  background: #1a2535; border: 1px solid #2e4255; border-radius: 6px;
+  padding: 6px; display: flex; flex-wrap: wrap; gap: 3px; width: 140px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+.icon-picker-opt {
+  background: none; border: 1px solid #2e3e50; color: #9ab;
+  width: 24px; height: 24px; border-radius: 3px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: inherit;
+}
+.icon-picker-opt:hover, .icon-picker-opt.active { background: #1e4a6a; border-color: #3a7a9a; color: #7acce0; }
+.icon-picker-none { font-size: 9px; color: #667 !important; }

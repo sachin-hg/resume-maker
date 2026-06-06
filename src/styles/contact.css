@@ -1,0 +1,42 @@
+/* ── Contact bar ── */
+.contact-bar {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 4px 14px;
+  padding: 8px 28px; border-bottom: 1px solid #e2e2e2;
+  font-size: 11px; color: #333; position: relative; background: #fff;
+}
+.contact-bar-v {
+  flex-direction: column; align-items: flex-start; gap: 6px;
+  padding: 10px 16px; border-bottom: none; border-top: none;
+}
+
+.contact-item { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.contact-item-v { width: 100%; align-items: flex-start; white-space: normal; }
+.contact-item-v .e { word-break: break-all; line-height: 1.4; }
+.ci-icon { display: flex; align-items: center; color: #1e2d3e; flex-shrink: 0; }
+a.ci-icon, .ci-link-icon {
+  text-decoration: none; color: inherit; cursor: pointer;
+  display: flex; align-items: center; flex-shrink: 0;
+}
+a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
+.ci-opt { position: relative; }
+.btn-ci-rm {
+  background: none; border: none; cursor: pointer; color: transparent;
+  font-size: 11px; padding: 0 0 0 2px; line-height: 1; font-family: inherit;
+  transition: color 0.1s; flex-shrink: 0;
+}
+.ci-opt:hover .btn-ci-rm { color: #ccc; }
+.btn-ci-rm:hover { color: #c0392b !important; }
+.btn-ci-add {
+  background: none; border: 1px dashed #ccc; color: #bbb;
+  font-size: 10px; padding: 1px 6px; border-radius: 2px;
+  cursor: pointer; font-family: inherit; white-space: nowrap;
+}
+.btn-ci-add:hover { border-color: #666; color: #555; }
+
+/* ── Contact bar dark override ── */
+.contact-bar-dark { background: transparent; border-bottom-color: rgba(255,255,255,0.1) !important; }
+.contact-bar-dark .ci-icon { color: rgba(255,255,255,0.45) !important; }
+.contact-bar-dark a.ci-icon svg rect[fill="#1e2d3e"] { fill: transparent; }
+.contact-bar-dark .btn-ci-add { border-color: rgba(255,255,255,0.2) !important; color: rgba(255,255,255,0.4) !important; }
+.contact-bar-dark .btn-ci-rm { color: transparent !important; }
+.contact-bar-dark .ci-opt:hover .btn-ci-rm { color: rgba(255,255,255,0.4) !important; }

@@ -1,0 +1,14 @@
+/* ── Key Achievements ── */
+.ach-list { display: flex; flex-direction: column; gap: 8px; }
+.ach-list.sec-2col { display: grid; flex-direction: unset; gap: 8px 24px; }
+.ach-list.sec-2col .ach-item { align-self: start; }
+.ach-item { padding-bottom: 6px; border-bottom: 1px solid #f0f0f0; }
+.ach-item:last-child { border-bottom: none; }
+.ach-header-row { display: flex; align-items: flex-start; gap: 6px; }
+.ach-title {
+  font-size: 13px; font-weight: 600; color: #222;
+  margin: 0 0 2px; flex: 1; display: block;
+}
+.ach-desc {
+  font-size: 11.5px; color: #555; display: block; line-height: 1.45;
+}

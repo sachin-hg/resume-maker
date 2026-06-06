@@ -1,0 +1,89 @@
+/* ── HEADER — Classic / Two-col dark ── */
+.rh {
+  background: #1e2d3e; padding: 20px 28px 16px; color: #fff;
+}
+.rh-with-photo {
+  display: flex; align-items: center; gap: 20px;
+}
+.rh-content { flex: 1; min-width: 0; }
+.rh-name {
+  font-size: 38px; font-weight: 700; color: #fff; margin: 0 0 5px;
+  line-height: 1.1; display: block; letter-spacing: -0.3px;
+}
+.rh-title {
+  font-size: 15px; font-weight: 400; color: rgba(255,255,255,0.93);
+  display: block; border-bottom: 1px solid rgba(255,255,255,0.3);
+  padding-bottom: 10px; margin-bottom: 9px;
+}
+.rh-summary {
+  font-size: 12px; color: rgba(255,255,255,0.85); display: block; line-height: 1.5;
+}
+
+/* ── Photo block ── */
+.photo-block { position: relative; flex-shrink: 0; }
+/* Extend hover zone below the circle to include the flip button */
+.photo-block::after { content: ''; position: absolute; left: 0; right: 0; bottom: -22px; height: 22px; }
+.photo-container { position: relative; }
+.photo-img {
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid rgba(255,255,255,0.3);
+  display: block;
+}
+.rh-minimal .photo-img { border-color: rgba(0,0,0,0.15); }
+.photo-rm {
+  position: absolute; top: -4px; right: -4px;
+  background: #c0392b; color: #fff; border: none; border-radius: 50%;
+  width: 18px; height: 18px; font-size: 11px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  line-height: 1; padding: 0; font-family: inherit;
+}
+.photo-placeholder {
+  border-radius: 50%; border: 2px dashed rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.45);
+  font-size: 10px; cursor: pointer; font-family: inherit;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s; white-space: nowrap;
+}
+.rh-minimal .photo-placeholder {
+  border-color: rgba(0,0,0,0.15); background: rgba(0,0,0,0.04); color: #aaa;
+}
+.photo-placeholder:hover { background: rgba(255,255,255,0.12) !important; }
+.photo-flip-btn {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20,30,50,0.85);
+  color: #ddd;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  padding: 2px 8px;
+  font-size: 9px;
+  cursor: pointer;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s 0.6s;
+  font-family: inherit;
+  z-index: 10;
+}
+.photo-block:hover .photo-flip-btn {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.1s;
+}
+
+/* Print: show actual photo, hide placeholder and empty block */
+@media print {
+  .photo-placeholder { display: none !important; }
+  .photo-rm { display: none !important; }
+  .photo-block-empty { display: none !important; width: 0 !important; height: 0 !important; overflow: hidden !important; }
+}
+
+/* ── HEADER — Minimal ── */
+.rh-minimal {
+  padding: 20px 28px 14px;
+  border-bottom-style: solid; border-bottom-width: 2px;
+}
+.rh-title-accent { border-bottom: none !important; padding-bottom: 0 !important; margin-bottom: 0 !important; }
+.summary-section-text { display: block; line-height: 1.5; }

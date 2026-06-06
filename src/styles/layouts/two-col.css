@@ -1,0 +1,17 @@
+/* ── TWO-COLUMN LAYOUT ── */
+.resume-two-col {
+  display: flex; flex: 1; align-items: stretch;
+}
+.two-col-main {
+  flex: 3; min-width: 0; display: flex; flex-direction: column;
+  background: #fff; align-self: stretch; position: relative;
+}
+.two-col-sidebar {
+  flex: 2; min-width: 0; background: #f0f2f5;
+  border-left: 1px solid #e2e4e8; display: flex; flex-direction: column; align-self: stretch;
+}
+.two-col-sidebar .section { padding-left: 20px; padding-right: 20px; }
+.two-col-sidebar .extra-grid { grid-template-columns: 1fr; }
+.two-col-sidebar .skill-tag { font-size: 10px; padding: 3px 7px; }
+.two-col-sidebar .skills-row { gap: 4px; }
+.two-col-reversed { flex-direction: row-reverse; }

@@ -1,0 +1,58 @@
+/* ── Resume wrapper (A4) ── */
+.resume {
+  width: 210mm; min-height: 297mm; background: var(--th-page-bg, #fff);
+  box-shadow: 0 4px 28px rgba(0,0,0,0.28);
+  display: flex; flex-direction: column; font-size: 12.5px;
+  position: relative;
+  font-family: var(--th-font-family, 'Inter', -apple-system, sans-serif);
+}
+/* Print: hide blobs, restore overflow containment, remove box-shadow */
+@media print {
+  .resume { box-shadow: none !important; min-height: 100vh; overflow: hidden; }
+  .resume-two-col, .resume-sdark { min-height: 100%; }
+  .two-col-main, .two-col-sidebar, .sdark-sidebar, .sdark-main { min-height: 100vh; }
+}
+
+/* ── Theme blobs (decorative background elements) ── */
+.blob-clip {
+  position: absolute; inset: 0;
+  overflow: hidden; pointer-events: none; z-index: 0;
+}
+.theme-blob {
+  display: var(--th-blob-display, none);
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+.theme-blob-1 {
+  width: 320px; height: 320px;
+  background: var(--th-blob-color-1, rgba(74,111,165,0.12));
+  border-radius: 50%;
+  top: -80px; right: -80px;
+}
+.theme-blob-2 {
+  width: 180px; height: 180px;
+  background: var(--th-blob-color-2, rgba(74,111,165,0.08));
+  border-radius: 50%;
+  bottom: 60px; left: -60px;
+}
+
+/* ── Corner arc decorations ── */
+.corner-deco {
+  position: absolute; inset: 0;
+  overflow: hidden; pointer-events: none; z-index: 0;
+}
+.corner-arc { position: absolute; border-radius: 50%; pointer-events: none; }
+.corner-arc-1 {
+  width: 680px; height: 680px;
+  background: var(--th-arc-color-1, transparent);
+  top: -340px; right: -340px;
+}
+.corner-arc-2 {
+  width: 580px; height: 580px;
+  background: var(--th-arc-color-2, transparent);
+  bottom: -290px; left: -290px;
+}
+
+/* ensure resume content sits above blobs/deco */
+.resume > *:not(.theme-blob):not(.blob-clip):not(.corner-deco) { position: relative; z-index: 1; }

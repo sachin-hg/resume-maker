@@ -1,0 +1,147 @@
+/* ── DARK SIDEBAR LAYOUT ── */
+.sdark-sidebar {
+  width: 210px; flex-shrink: 0; background: #1e2d3e;
+  display: flex; flex-direction: column;
+  padding: 20px 0;
+}
+.sdark-sidebar .section { padding: 10px 14px 6px; }
+
+/* All text in dark sidebar: force white/light */
+.sdark-sidebar .section-title { color: rgba(255,255,255,0.65) !important; border-bottom-color: rgba(255,255,255,0.18) !important; font-size: 10.5px; letter-spacing: 1px; }
+.sdark-sidebar .section-title-row { border-bottom-color: rgba(255,255,255,0.18) !important; position: relative; }
+.sdark-sidebar .e { color: rgba(255,255,255,0.82) !important; }
+.sdark-sidebar .job-title { color: rgba(255,255,255,0.9) !important; font-size: 12px !important; }
+.sdark-sidebar .job-company-inline { color: rgba(255,255,255,0.6) !important; }
+.sdark-sidebar .job-period-inline { color: rgba(255,255,255,0.5) !important; }
+.sdark-sidebar .job-desc { color: rgba(255,255,255,0.5) !important; }
+.sdark-sidebar .bullet-text { color: rgba(255,255,255,0.75) !important; font-size: 10.5px !important; }
+.sdark-sidebar .bullet-marker { color: rgba(255,255,255,0.4) !important; }
+.sdark-sidebar .edu-degree { color: rgba(255,255,255,0.9) !important; font-size: 12px !important; }
+.sdark-sidebar .edu-inst { color: rgba(255,255,255,0.6) !important; }
+.sdark-sidebar .edu-period, .sdark-sidebar .edu-location { color: rgba(255,255,255,0.5) !important; }
+.sdark-sidebar .meta-sep { color: rgba(255,255,255,0.3) !important; }
+.sdark-sidebar .ach-title { color: rgba(255,255,255,0.9) !important; font-size: 11.5px !important; }
+.sdark-sidebar .ach-desc { color: rgba(255,255,255,0.65) !important; font-size: 10.5px !important; }
+.sdark-sidebar .ach-item { border-bottom-color: rgba(255,255,255,0.08) !important; }
+.sdark-sidebar .extra-item-title { color: rgba(255,255,255,0.9) !important; font-size: 11.5px !important; }
+.sdark-sidebar .extra-item-desc { color: rgba(255,255,255,0.65) !important; font-size: 10.5px !important; }
+.sdark-sidebar .summary-section-text { color: rgba(255,255,255,0.72) !important; font-size: 11px !important; }
+.sdark-sidebar .extra-grid { grid-template-columns: 1fr; }
+
+/* Skills in dark sidebar */
+.sdark-sidebar .skill-tag { background: rgba(255,255,255,0.1) !important; color: rgba(255,255,255,0.85) !important; font-size: 10px; padding: 3px 7px; }
+.sdark-sidebar .skill-remove { color: rgba(255,255,255,0.3) !important; }
+.sdark-sidebar .sk-handle { color: rgba(255,255,255,0.15) !important; }
+.sdark-sidebar .skill-tag:hover .sk-handle { color: rgba(255,255,255,0.45) !important; }
+.sdark-sidebar .btn-add-skill { color: rgba(255,255,255,0.3) !important; border-color: rgba(255,255,255,0.15) !important; }
+
+/* Buttons in dark sidebar */
+.sdark-sidebar .btn-move { border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.3); }
+.sdark-sidebar .btn-move:hover:not(:disabled) { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border-color: rgba(255,255,255,0.4); }
+.sdark-sidebar .btn-remove-section { border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.3); }
+.sdark-sidebar .btn-remove-section:hover { color: #ff8080; border-color: #ff8080; }
+.sdark-sidebar .btn-add-section { border-color: rgba(255,255,255,0.18); color: rgba(255,255,255,0.3); }
+.sdark-sidebar .btn-remove-job { color: rgba(255,255,255,0.25) !important; }
+.sdark-sidebar .btn-remove-job:hover { color: #ff8080 !important; }
+.sdark-sidebar .btn-field-rm { color: transparent !important; }
+.sdark-sidebar .opt-row:hover .btn-field-rm { color: rgba(255,255,255,0.3) !important; }
+.sdark-sidebar .btn-field-add { color: rgba(255,255,255,0.3) !important; }
+
+/* Editable hover/focus in dark sidebar */
+.sdark-sidebar .e:hover { background: rgba(255,255,255,0.07) !important; }
+.sdark-sidebar .e:focus { background: rgba(255,255,255,0.11) !important; outline-color: rgba(255,255,255,0.35) !important; }
+
+/* Light-bg sidebar override — when sidebarBg is a light color, revert white-text overrides */
+.sdark-sidebar.sdark-light .section-title { color: #555 !important; border-bottom-color: #ddd !important; }
+.sdark-sidebar.sdark-light .section-title-row { border-bottom-color: #ddd !important; }
+.sdark-sidebar.sdark-light .e { color: #333 !important; }
+.sdark-sidebar.sdark-light .job-title { color: #222 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .job-company-inline { color: #555 !important; }
+.sdark-sidebar.sdark-light .job-period-inline { color: #666 !important; }
+.sdark-sidebar.sdark-light .job-desc { color: #666 !important; }
+.sdark-sidebar.sdark-light .bullet-text { color: #444 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .bullet-marker { color: #888 !important; }
+.sdark-sidebar.sdark-light .edu-degree { color: #222 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .edu-inst { color: #555 !important; }
+.sdark-sidebar.sdark-light .edu-period, .sdark-sidebar.sdark-light .edu-location { color: #666 !important; }
+.sdark-sidebar.sdark-light .meta-sep { color: #bbb !important; }
+.sdark-sidebar.sdark-light .ach-title { color: #222 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .ach-desc { color: #555 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .ach-item { border-bottom-color: #eee !important; }
+.sdark-sidebar.sdark-light .extra-item-title { color: #222 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .extra-item-desc { color: #555 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .summary-section-text { color: #444 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .skill-tag { background: rgba(0,0,0,0.07) !important; color: #333 !important; }
+.sdark-sidebar.sdark-light .skill-remove { color: #aaa !important; }
+.sdark-sidebar.sdark-light .btn-add-skill { color: #aaa !important; border-color: #ddd !important; }
+.sdark-sidebar.sdark-light .btn-move { border-color: #ddd; color: #aaa; }
+.sdark-sidebar.sdark-light .btn-move:hover:not(:disabled) { background: rgba(0,0,0,0.05); color: #555; border-color: #bbb; }
+.sdark-sidebar.sdark-light .btn-remove-section { border-color: #ddd; color: #aaa; }
+.sdark-sidebar.sdark-light .btn-field-add { color: #aaa !important; }
+.sdark-sidebar.sdark-light .e:hover { background: rgba(0,0,0,0.04) !important; }
+.sdark-sidebar.sdark-light .e:focus { background: rgba(0,0,0,0.06) !important; outline-color: rgba(0,0,0,0.2) !important; }
+.sdark-sidebar.sdark-light .sdark-divider { background: rgba(0,0,0,0.1) !important; }
+.sdark-sidebar.sdark-light .sdark-photo { border-color: rgba(0,0,0,0.15) !important; }
+.sdark-sidebar.sdark-light .lang-row { border-bottom-color: rgba(0,0,0,0.08) !important; }
+
+.sdark-name-block { padding: 0 14px; position: relative; display: flex; flex-direction: column; align-items: center; }
+.sdark-name-block.pa-left { align-items: flex-start; text-align: left; }
+.sdark-name-block.pa-right { align-items: flex-end; text-align: right; }
+.sdark-name {
+  font-size: 26px; font-weight: 700; color: #fff;
+  margin: 0 0 3px; display: block; line-height: 1.15; letter-spacing: -0.2px;
+  word-break: break-word; width: 100%;
+}
+.sdark-name-block.pa-left .sdark-name { text-align: left; }
+.sdark-name-block.pa-right .sdark-name { text-align: right; }
+.sdark-title {
+  font-size: 11px; font-weight: 400; color: #1a7a70; display: block;
+  line-height: 1.4; word-break: break-word; overflow-wrap: break-word; width: 100%;
+}
+.sdark-name-block.pa-left .sdark-title { text-align: left; }
+.sdark-name-block.pa-right .sdark-title { text-align: right; }
+.sdark-photo-wrap { position: relative; margin-bottom: 12px; width: fit-content; }
+/* Photo alignment buttons — appear on hover of the name block */
+.sdark-align-btns {
+  display: flex; gap: 3px; margin-top: 5px;
+  opacity: 0; pointer-events: none; transition: opacity 0.12s;
+}
+.sdark-name-block:hover .sdark-align-btns { opacity: 1; pointer-events: auto; }
+.sdark-align-btn {
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.35); width: 19px; height: 19px; border-radius: 3px;
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-family: inherit; padding: 0; transition: all 0.12s; flex-shrink: 0;
+}
+.sdark-align-btn.active { background: rgba(255,255,255,0.18); color: #fff; border-color: rgba(255,255,255,0.45); }
+.sdark-align-btn:hover:not(.active) { background: rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); }
+.sdark-photo { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.25); display: block; }
+.sdark-divider { height: 1px; background: rgba(255,255,255,0.1); margin: 10px 14px; }
+
+.sdark-main {
+  flex: 1; min-width: 0; display: flex; flex-direction: column; background: #fff; align-self: stretch;
+  position: relative;
+}
+
+/* Sidebar flip */
+.resume-sdark { display: flex; flex: 1; min-height: 297mm; align-items: stretch; }
+.sdark-left .sdark-sidebar { order: -1; }
+
+/* ── Dark sidebar overrides for new sections ── */
+.sdark-sidebar .lang-row { border-bottom-color: rgba(255,255,255,0.1) !important; }
+.sdark-sidebar .lang-level { color: rgba(255,255,255,0.5) !important; }
+.sdark-sidebar .cert-title { color: rgba(255,255,255,0.9) !important; }
+.sdark-sidebar .cert-issuer { color: rgba(255,255,255,0.6) !important; }
+.sdark-sidebar .cert-date { color: rgba(255,255,255,0.4) !important; }
+.sdark-sidebar .course-title { color: rgba(255,255,255,0.9) !important; }
+.sdark-sidebar .course-provider { color: rgba(255,255,255,0.5) !important; }
+.sdark-sidebar .course-desc { color: rgba(255,255,255,0.65) !important; }
+.sdark-sidebar .passion-title { color: rgba(255,255,255,0.9) !important; }
+.sdark-sidebar .passion-desc { color: rgba(255,255,255,0.65) !important; }
+.sdark-sidebar .donut-legend-text { color: rgba(255,255,255,0.7) !important; }
+.sdark-sidebar .skill-rated-name { color: rgba(255,255,255,0.85) !important; }
+.sdark-sidebar .skills-rated-row { border-bottom-color: rgba(255,255,255,0.1) !important; }
+
+/* ── Sidebar photo block in dark sidebar ── */
+.sdark-sidebar .photo-placeholder { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.35); }
+.sdark-sidebar .photo-placeholder:hover { background: rgba(255,255,255,0.1) !important; }

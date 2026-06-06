@@ -1,0 +1,9 @@
+/* ── Section overline style ── */
+.resume-sec-overline .section-title-row,
+.resume-sec-overline .extra-title-row {
+  border-bottom: none !important;
+  border-top: var(--th-sec-rule-w, 1.5px) solid;
+  padding-bottom: 0;
+  padding-top: 6px;
+  margin-bottom: 10px;
+}

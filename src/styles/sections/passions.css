@@ -1,0 +1,15 @@
+/* ── Passions ── */
+.passion-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+.passion-icon-wrap {
+  width: 26px; height: 26px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  color: #fff; position: relative; cursor: pointer;
+}
+.passion-icon-color {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  opacity: 0; cursor: pointer; border: none; padding: 0; border-radius: 50%;
+}
+.passion-text { flex: 1; min-width: 0; }
+.passion-header-row { display: flex; align-items: center; gap: 2px; margin-bottom: 2px; }
+.passion-title { font-size: 12.5px; font-weight: 600; flex: 1; display: block; }
+.passion-desc { font-size: 11px; color: #555; display: block; line-height: 1.4; }

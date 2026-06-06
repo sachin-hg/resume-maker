@@ -1,0 +1,40 @@
+/* ── Timeline decoration (resume-tl class on .resume) ── */
+.jobs-tl-wrap { position: relative; }
+.tl-dot { display: none; }
+
+.resume-tl .jobs-tl-wrap {
+  padding-left: 22px;
+}
+.resume-tl .jobs-tl-wrap::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 16px;
+  width: 2px;
+  background: var(--th-accent, #1e3a5f);
+  border-radius: 1px;
+  z-index: 0;
+}
+.resume-tl .job-entry {
+  position: relative;
+}
+.resume-tl .tl-dot {
+  display: block;
+  position: absolute;
+  left: -22px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--th-accent2, var(--th-accent, #e8611a));
+  border: 2.5px solid white;
+  box-shadow: 0 0 0 1.5px var(--th-accent2, var(--th-accent, #e8611a));
+  z-index: 2;
+  pointer-events: none;
+}
+/* timeline dot in dark sidebars */
+.resume-tl .sdark-sidebar .tl-dot,
+.resume-tl .sb-sidebar .tl-dot {
+  border-color: rgba(255,255,255,0.2);
+}

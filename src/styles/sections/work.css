@@ -1,0 +1,72 @@
+/* ── Work experience ── */
+.job-entry {
+  margin-bottom: var(--th-job-sep-mb, 14px);
+  border-bottom: var(--th-job-sep-border, none);
+  padding-bottom: var(--th-job-sep-pb, 0);
+}
+.job-entry:last-of-type { border-bottom: none; padding-bottom: 0; }
+.job-header-row { display: flex; align-items: baseline; gap: 6px; }
+.job-title {
+  font-size: 13.5px; font-weight: 700; color: #1a7a70;
+  margin: 0; flex: 1; display: block;
+}
+.job-meta {
+  display: flex; align-items: baseline; gap: 3px; flex-shrink: 0; max-width: 50%;
+}
+.job-meta-below {
+  max-width: 100%; margin-top: 1px; margin-bottom: 2px;
+}
+.job-meta-item { display: inline-flex; align-items: baseline; gap: 2px; }
+.job-company-inline { font-size: 12px; font-weight: 400; color: #222; }
+.meta-sep { font-size: 11px; color: #aaa; flex-shrink: 0; }
+.job-period-inline { font-size: 11px; font-style: italic; color: #666; }
+.job-desc { font-style: italic; font-size: 11px; color: #999; margin: 0; display: block; }
+
+/* ── Bullets ── */
+.bullets { list-style: none; margin: 0 0 3px; padding: 0; }
+.bullet-row {
+  display: flex; align-items: flex-start; gap: 7px;
+  margin-bottom: 1.5px; font-size: 11px; line-height: 1.45;
+}
+.bullet-marker { color: #444; flex-shrink: 0; font-size: 9px; line-height: 1.9; letter-spacing: 0; }
+.bullet-text { flex: 1; display: inline; min-width: 10px; }
+.bullet-remove {
+  background: none; border: none; cursor: pointer; color: #ccc;
+  font-size: 13px; padding: 0; line-height: 1.5; flex-shrink: 0; font-family: inherit;
+}
+.bullet-remove:hover { color: #c0392b; }
+.btn-add-bullet {
+  background: none; border: none; cursor: pointer; color: #aaa;
+  font-size: 10.5px; padding: 1px 0; font-family: inherit;
+}
+.btn-add-bullet:hover { color: #555; }
+
+/* Optional field rows */
+.opt-row { display: flex; align-items: flex-start; gap: 6px; }
+.opt-row > .job-desc { flex: 1; }
+.btn-field-rm {
+  background: none; border: none; cursor: pointer; color: transparent;
+  font-size: 12px; padding: 0; line-height: 1.5; flex-shrink: 0;
+  font-family: inherit; transition: color 0.1s;
+}
+.opt-row:hover .btn-field-rm,
+.job-meta-item:hover .btn-field-rm { color: #ccc; }
+.btn-field-rm:hover { color: #c0392b !important; }
+.btn-field-add {
+  background: none; border: none; cursor: pointer; color: #c0c0c0;
+  font-size: 10px; padding: 0 0 1px; font-family: inherit;
+  font-style: italic; text-decoration: underline;
+  text-decoration-style: dashed; text-underline-offset: 2px; display: block;
+}
+.btn-field-add:hover { color: #555; }
+.btn-remove-job {
+  background: none; border: none; cursor: pointer; color: #ccc;
+  font-size: 11px; padding: 0; flex-shrink: 0; line-height: 1.5; font-family: inherit;
+}
+.btn-remove-job:hover { color: #c0392b; }
+.btn-add-section {
+  background: none; border: 1px dashed #ccc; color: #aaa;
+  font-size: 10.5px; padding: 3px 12px; cursor: pointer;
+  margin-top: 4px; width: 100%; font-family: inherit;
+}
+.btn-add-section:hover { border-color: #888; color: #555; }

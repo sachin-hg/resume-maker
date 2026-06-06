@@ -1,0 +1,9 @@
+/* ── Section left-accent style (vertical bar left of title) ── */
+.resume-sec-left-accent .section-title-row,
+.resume-sec-left-accent .extra-title-row {
+  border-left: 3px solid var(--th-accent, #c8602a);
+  border-bottom: 1px solid rgba(0,0,0,0.07) !important;
+  padding-left: 9px;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}

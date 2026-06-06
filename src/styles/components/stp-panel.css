@@ -1,0 +1,50 @@
+/* ── Contextual typography panel ── */
+.stp {
+  position: absolute; right: calc(100% + 8px); top: 0; width: 192px;
+  background: #1a2535; border-radius: 5px; padding: 7px 9px 4px;
+  opacity: 0; pointer-events: none; z-index: 20;
+  max-height: 82vh; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: #2a3a50 transparent;
+  font-family: inherit;
+}
+.stp.stp-visible { opacity: 1; pointer-events: auto; transition: opacity 0.12s; }
+.stp.stp-flipped { right: auto; left: calc(100% + 8px); }
+.stp.stp-below { right: auto; left: 4px; top: calc(100% + 4px); }
+
+.tp-row { margin-bottom: 7px; }
+.tp-row:last-child { margin-bottom: 1px; }
+.tp-label { font-size: 10px; color: #7a9aaa; margin-bottom: 3px; }
+.tp-line1 { display: flex; align-items: center; gap: 3px; margin-bottom: 3px; }
+.tp-size {
+  width: 38px; background: #1e2e40; border: 1px solid #2e3e50;
+  color: #b0c0cc; font-size: 11px; padding: 2px 3px; border-radius: 3px;
+  font-family: inherit; text-align: center; outline: none; -moz-appearance: textfield;
+}
+.tp-size::-webkit-inner-spin-button, .tp-size::-webkit-outer-spin-button { -webkit-appearance: none; }
+.tp-size:focus { border-color: #4a7a9a; }
+.tp-unit { font-size: 9px; color: #445566; margin-right: 1px; }
+.tp-btn {
+  background: #1e2e40; border: 1px solid #2e3e50; color: #667788;
+  font-size: 11px; width: 22px; height: 22px; border-radius: 3px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; font-family: inherit; line-height: 1; flex-shrink: 0;
+}
+.tp-btn:hover { border-color: #5a7a8a; color: #99aabb; }
+.tp-btn.tp-on { background: #1a4a6a; border-color: #3a7a9a; color: #7acce0; }
+.tp-bold { font-weight: 700; }
+.tp-ital { font-style: italic; }
+.tp-color {
+  width: 26px; height: 22px; border: 1px solid #2e3e50; border-radius: 3px;
+  cursor: pointer; padding: 2px; background: #1e2e40; margin-left: auto; flex-shrink: 0;
+}
+.tp-color::-webkit-color-swatch-wrapper { padding: 0; }
+.tp-color::-webkit-color-swatch { border: none; border-radius: 2px; }
+.tp-line2 { display: flex; gap: 3px; }
+.tp-align {
+  background: #1e2e40; border: 1px solid #2e3e50; color: #667788;
+  width: 26px; height: 20px; border-radius: 3px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  padding: 0; flex-shrink: 0;
+}
+.tp-align:hover { border-color: #5a7a8a; color: #99aabb; }
+.tp-align.tp-on { background: #1a4a6a; border-color: #3a7a9a; color: #7acce0; }

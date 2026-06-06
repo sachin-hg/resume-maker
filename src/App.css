@@ -10,6 +10,16 @@
   --th-job-sep-pb: 0px;
   --th-job-sep-mb: 14px;
   --th-blob-display: none;
+  --th-blob-color-1: rgba(74,111,165,0.12);
+  --th-blob-color-2: rgba(74,111,165,0.08);
+  --th-arc-color-1: transparent;
+  --th-arc-color-2: transparent;
+  --th-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  --th-photo-radius: 50%;
+  --th-accent: #1a7a70;
+  --th-accent2: #1a7a70;
+  --th-badge-color: #1a7a70;
+  --th-title-bg: transparent;
 }
 
 /* ── Reset & base ── */
@@ -417,16 +427,21 @@ kbd {
   width: 210mm; min-height: 297mm; background: var(--th-page-bg, #fff);
   box-shadow: 0 4px 28px rgba(0,0,0,0.28);
   display: flex; flex-direction: column; font-size: 12.5px;
-  position: relative; overflow: hidden;
+  position: relative;
+  font-family: var(--th-font-family, 'Inter', -apple-system, sans-serif);
 }
-/* Print: remove box-shadow, ensure full height */
+/* Print: hide blobs, restore overflow containment, remove box-shadow */
 @media print {
-  .resume { box-shadow: none !important; min-height: 100vh; }
+  .resume { box-shadow: none !important; min-height: 100vh; overflow: hidden; }
   .resume-two-col, .resume-sdark { min-height: 100%; }
   .two-col-main, .two-col-sidebar, .sdark-sidebar, .sdark-main { min-height: 100vh; }
 }
 
 /* ── Theme blobs (decorative background elements) ── */
+.blob-clip {
+  position: absolute; inset: 0;
+  overflow: hidden; pointer-events: none; z-index: 0;
+}
 .theme-blob {
   display: var(--th-blob-display, none);
   position: absolute;
@@ -435,18 +450,39 @@ kbd {
 }
 .theme-blob-1 {
   width: 320px; height: 320px;
-  background: rgba(74, 111, 165, 0.12);
+  background: var(--th-blob-color-1, rgba(74,111,165,0.12));
   border-radius: 50%;
   top: -80px; right: -80px;
 }
 .theme-blob-2 {
   width: 180px; height: 180px;
-  background: rgba(74, 111, 165, 0.08);
+  background: var(--th-blob-color-2, rgba(74,111,165,0.08));
   border-radius: 50%;
   bottom: 60px; left: -60px;
 }
-/* ensure resume content sits above blobs */
-.resume > *:not(.theme-blob) { position: relative; z-index: 1; }
+
+/* ── Corner arc decorations ── */
+.corner-deco {
+  position: absolute; inset: 0;
+  overflow: hidden; pointer-events: none; z-index: 0;
+}
+.corner-arc { position: absolute; border-radius: 50%; pointer-events: none; }
+.corner-arc-1 {
+  width: 680px; height: 680px;
+  background: var(--th-arc-color-1, transparent);
+  top: -340px; right: -340px;
+}
+.corner-arc-2 {
+  width: 580px; height: 580px;
+  background: var(--th-arc-color-2, transparent);
+  bottom: -290px; left: -290px;
+}
+
+/* ── Photo shape ── */
+.photo-img { border-radius: var(--th-photo-radius, 50%); }
+.sdark-photo { border-radius: var(--th-photo-radius, 50%) !important; }
+/* ensure resume content sits above blobs/deco */
+.resume > *:not(.theme-blob):not(.blob-clip):not(.corner-deco) { position: relative; z-index: 1; }
 
 /* ── HEADER — Classic / Two-col dark ── */
 .rh {
@@ -726,7 +762,8 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 /* ── Extra (configurable) section ── */
 .extra-title-row {
   display: flex; align-items: center; gap: 6px;
-  border-bottom: 1.5px solid #333; padding-bottom: 4px; margin-bottom: 10px;
+  border-bottom-width: var(--th-sec-rule-w, 1.5px); border-bottom-style: solid;
+  padding-bottom: 4px; margin-bottom: 10px;
 }
 .extra-section-title { flex: 1; border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
 .btn-remove-section {
@@ -748,10 +785,7 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 }
 
 /* ── Contact bar dark override ── */
-.contact-bar-dark { background: transparent !important; border-bottom-color: rgba(255,255,255,0.1) !important; }
-.contact-bar-dark,
-.contact-bar-dark .e,
-.contact-bar-dark .contact-item { color: rgba(255,255,255,0.75) !important; }
+.contact-bar-dark { background: transparent; border-bottom-color: rgba(255,255,255,0.1) !important; }
 .contact-bar-dark .ci-icon { color: rgba(255,255,255,0.45) !important; }
 .contact-bar-dark a.ci-icon svg rect[fill="#1e2d3e"] { fill: transparent; }
 .contact-bar-dark .btn-ci-add { border-color: rgba(255,255,255,0.2) !important; color: rgba(255,255,255,0.4) !important; }
@@ -764,7 +798,7 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 }
 .two-col-main {
   flex: 3; min-width: 0; display: flex; flex-direction: column;
-  background: #fff; align-self: stretch;
+  background: #fff; align-self: stretch; position: relative;
 }
 .two-col-sidebar {
   flex: 2; min-width: 0; background: #f0f2f5;
@@ -828,6 +862,39 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 .sdark-sidebar .e:hover { background: rgba(255,255,255,0.07) !important; }
 .sdark-sidebar .e:focus { background: rgba(255,255,255,0.11) !important; outline-color: rgba(255,255,255,0.35) !important; }
 
+/* Light-bg sidebar override — when sidebarBg is a light color, revert white-text overrides */
+.sdark-sidebar.sdark-light .section-title { color: #555 !important; border-bottom-color: #ddd !important; }
+.sdark-sidebar.sdark-light .section-title-row { border-bottom-color: #ddd !important; }
+.sdark-sidebar.sdark-light .e { color: #333 !important; }
+.sdark-sidebar.sdark-light .job-title { color: #222 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .job-company-inline { color: #555 !important; }
+.sdark-sidebar.sdark-light .job-period-inline { color: #666 !important; }
+.sdark-sidebar.sdark-light .job-desc { color: #666 !important; }
+.sdark-sidebar.sdark-light .bullet-text { color: #444 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .bullet-marker { color: #888 !important; }
+.sdark-sidebar.sdark-light .edu-degree { color: #222 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .edu-inst { color: #555 !important; }
+.sdark-sidebar.sdark-light .edu-period, .sdark-sidebar.sdark-light .edu-location { color: #666 !important; }
+.sdark-sidebar.sdark-light .meta-sep { color: #bbb !important; }
+.sdark-sidebar.sdark-light .ach-title { color: #222 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .ach-desc { color: #555 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .ach-item { border-bottom-color: #eee !important; }
+.sdark-sidebar.sdark-light .extra-item-title { color: #222 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .extra-item-desc { color: #555 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .summary-section-text { color: #444 !important; font-size: inherit !important; }
+.sdark-sidebar.sdark-light .skill-tag { background: rgba(0,0,0,0.07) !important; color: #333 !important; }
+.sdark-sidebar.sdark-light .skill-remove { color: #aaa !important; }
+.sdark-sidebar.sdark-light .btn-add-skill { color: #aaa !important; border-color: #ddd !important; }
+.sdark-sidebar.sdark-light .btn-move { border-color: #ddd; color: #aaa; }
+.sdark-sidebar.sdark-light .btn-move:hover:not(:disabled) { background: rgba(0,0,0,0.05); color: #555; border-color: #bbb; }
+.sdark-sidebar.sdark-light .btn-remove-section { border-color: #ddd; color: #aaa; }
+.sdark-sidebar.sdark-light .btn-field-add { color: #aaa !important; }
+.sdark-sidebar.sdark-light .e:hover { background: rgba(0,0,0,0.04) !important; }
+.sdark-sidebar.sdark-light .e:focus { background: rgba(0,0,0,0.06) !important; outline-color: rgba(0,0,0,0.2) !important; }
+.sdark-sidebar.sdark-light .sdark-divider { background: rgba(0,0,0,0.1) !important; }
+.sdark-sidebar.sdark-light .sdark-photo { border-color: rgba(0,0,0,0.15) !important; }
+.sdark-sidebar.sdark-light .lang-row { border-bottom-color: rgba(0,0,0,0.08) !important; }
+
 .sdark-name-block { padding: 0 14px; position: relative; display: flex; flex-direction: column; align-items: center; }
 .sdark-name-block.pa-left { align-items: flex-start; text-align: left; }
 .sdark-name-block.pa-right { align-items: flex-end; text-align: right; }
@@ -864,6 +931,7 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 
 .sdark-main {
   flex: 1; min-width: 0; display: flex; flex-direction: column; background: #fff; align-self: stretch;
+  position: relative;
 }
 
 /* Sidebar flip */
@@ -963,6 +1031,13 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 .rating-stars { gap: 2px; }
 .rstar { font-size: 13px; cursor: pointer; line-height: 1; flex-shrink: 0; transition: color 0.1s; }
 @media print { .rdot, .rstar { cursor: default; } }
+.rating-bar {
+  display: inline-block; width: 72px; height: 6px; border-radius: 3px;
+  background: rgba(0,0,0,0.10); overflow: hidden; margin-left: 6px;
+  flex-shrink: 0; cursor: pointer; vertical-align: middle;
+}
+.rating-bar-fill { display: block; height: 100%; border-radius: 3px; transition: width 0.15s; }
+@media print { .rating-bar { cursor: default; } }
 .skills-rated.sec-2col { display: grid; gap: 0 24px; }
 .skills-rated.sec-2col .skills-rated-row { align-self: start; }
 .lang-chip-level { opacity: 0.65; font-size: 10px; }
@@ -1072,7 +1147,7 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 }
 .three-col-main {
   flex: 3; min-width: 0; background: #fff; align-self: stretch;
-  display: flex; flex-direction: column;
+  display: flex; flex-direction: column; position: relative;
 }
 .three-col-right {
   flex: 2; min-width: 0; background: #f0f2f5;
@@ -1105,6 +1180,26 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 .three-col-right .extra-grid { grid-template-columns: 1fr; }
 .three-col-right .skills-row { gap: 4px; }
 .three-col-right .skill-tag { font-size: 10px; padding: 2px 7px; }
+
+/* Light-bg three-col-left override */
+.three-col-left.three-col-left-light .section-title { color: #555 !important; border-bottom-color: #ddd !important; }
+.three-col-left.three-col-left-light .section-title-row { border-bottom-color: #ddd !important; }
+.three-col-left.three-col-left-light .e { color: #333 !important; }
+.three-col-left.three-col-left-light .lang-row { border-bottom-color: rgba(0,0,0,0.08) !important; }
+.three-col-left.three-col-left-light .lang-level { color: #666 !important; }
+.three-col-left.three-col-left-light .passion-desc { color: #555 !important; }
+.three-col-left.three-col-left-light .ach-title { color: #222 !important; font-size: inherit !important; }
+.three-col-left.three-col-left-light .ach-desc { color: #555 !important; font-size: inherit !important; }
+.three-col-left.three-col-left-light .ach-item { border-bottom-color: #eee !important; }
+.three-col-left.three-col-left-light .summary-section-text { color: #444 !important; font-size: inherit !important; }
+.three-col-left.three-col-left-light .skill-tag { background: rgba(0,0,0,0.07) !important; color: #333 !important; }
+.three-col-left.three-col-left-light .skill-rated-name { color: #333 !important; }
+.three-col-left.three-col-left-light .donut-legend-text { color: #555 !important; }
+.three-col-left.three-col-left-light .btn-move { border-color: #ddd; color: #aaa; }
+.three-col-left.three-col-left-light .btn-remove-section { border-color: #ddd; color: #aaa; }
+.three-col-left.three-col-left-light .btn-add-section { border-color: #ddd; color: #aaa; }
+.three-col-left.three-col-left-light .e:hover { background: rgba(0,0,0,0.04) !important; }
+.three-col-left.three-col-left-light .e:focus { background: rgba(0,0,0,0.06) !important; outline-color: rgba(0,0,0,0.2) !important; }
 
 /* Three-col thumbnail */
 .tt-body-three { flex: 1; display: flex; gap: 0; }
@@ -1146,8 +1241,28 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 .sb-sidebar .btn-field-rm { color: transparent !important; }
 .sb-sidebar .opt-row:hover .btn-field-rm { color: rgba(255,255,255,0.3) !important; }
 .sb-sidebar .btn-field-add { color: rgba(255,255,255,0.3) !important; }
-.sb-main { flex: 1; padding: 16px 22px 8px; }
+.sb-main { flex: 1; padding: 16px 22px 8px; position: relative; }
 .sb-footer { padding: 8px 22px 14px; background: #fff; border-top: 1px solid #e8e8e8; }
+
+/* Light-bg sb-sidebar override */
+.sb-sidebar.sb-light .section-title { color: #555 !important; border-bottom-color: #ddd !important; }
+.sb-sidebar.sb-light .section-title-row { border-bottom-color: #ddd !important; }
+.sb-sidebar.sb-light .e { color: #333 !important; }
+.sb-sidebar.sb-light .skill-tag { background: rgba(0,0,0,0.07) !important; color: #333 !important; }
+.sb-sidebar.sb-light .skill-remove { color: #aaa !important; }
+.sb-sidebar.sb-light .btn-add-skill { color: #aaa !important; border-color: #ddd !important; }
+.sb-sidebar.sb-light .bullet-text { color: #444 !important; font-size: inherit !important; }
+.sb-sidebar.sb-light .bullet-marker { color: #888 !important; }
+.sb-sidebar.sb-light .summary-section-text { color: #444 !important; font-size: inherit !important; }
+.sb-sidebar.sb-light .lang-row { border-bottom-color: rgba(0,0,0,0.08) !important; }
+.sb-sidebar.sb-light .meta-sep { color: #bbb !important; }
+.sb-sidebar.sb-light .ach-title { color: #222 !important; }
+.sb-sidebar.sb-light .ach-desc { color: #555 !important; }
+.sb-sidebar.sb-light .section-actions .btn-move { border-color: #ddd; color: #aaa; }
+.sb-sidebar.sb-light .e:hover { background: rgba(0,0,0,0.04) !important; }
+.sb-sidebar.sb-light .e:focus { background: rgba(0,0,0,0.06) !important; outline-color: rgba(0,0,0,0.2) !important; }
+.sb-sidebar.sb-light .btn-field-add { color: #aaa !important; }
+
 /* Sidebar Band thumbnail */
 .tt-body-sbband { display: flex; align-items: stretch; flex: 1; }
 .tt-sbband-sidebar { width: 30%; background: #1e2d3e; padding: 4px 3px; display: flex; flex-direction: column; gap: 2px; }
@@ -1175,3 +1290,131 @@ a.ci-icon:hover, .ci-link-icon:hover { opacity: 0.7; }
 .fmt-b { font-weight: 700; }
 .fmt-i { font-style: italic; }
 .fmt-sep { width: 1px; height: 14px; background: #2e4255; flex-shrink: 0; }
+
+/* ── Timeline decoration (resume-tl class on .resume) ── */
+.jobs-tl-wrap { position: relative; }
+.tl-dot { display: none; }
+
+.resume-tl .jobs-tl-wrap {
+  padding-left: 22px;
+}
+.resume-tl .jobs-tl-wrap::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 8px;
+  bottom: 16px;
+  width: 2px;
+  background: var(--th-accent, #1e3a5f);
+  border-radius: 1px;
+  z-index: 0;
+}
+.resume-tl .job-entry {
+  position: relative;
+}
+.resume-tl .tl-dot {
+  display: block;
+  position: absolute;
+  left: -22px;
+  top: 3px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--th-accent2, var(--th-accent, #e8611a));
+  border: 2.5px solid white;
+  box-shadow: 0 0 0 1.5px var(--th-accent2, var(--th-accent, #e8611a));
+  z-index: 2;
+  pointer-events: none;
+}
+/* timeline dot in dark sidebars */
+.resume-tl .sdark-sidebar .tl-dot,
+.resume-tl .sb-sidebar .tl-dot {
+  border-color: rgba(255,255,255,0.2);
+}
+
+/* ── Section badge (resume-badge class on .resume) ── */
+.resume-badge .section-title-row {
+  position: relative;
+  padding-left: 26px;
+}
+.resume-badge .section-title-row::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  background: var(--th-badge-color, var(--th-accent, #2a9d5c));
+  border-radius: 3px;
+}
+/* badge in dark sidebars: use lighter tint */
+.resume-badge .sdark-sidebar .section-title-row::before,
+.resume-badge .sb-sidebar .section-title-row::before,
+.resume-badge .three-col-left .section-title-row::before {
+  background: rgba(255,255,255,0.25);
+}
+/* badge with no section rule — give section title a bottom margin instead */
+.resume-badge .section-title-row { margin-bottom: 8px; }
+
+/* extend badge to also cover extra-title-row (custom sections) */
+.resume-badge .extra-title-row {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 8px;
+}
+.resume-badge .extra-title-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 2px;
+  width: 16px; height: 16px;
+  background: var(--th-badge-color, var(--th-accent, #2a9d5c));
+  border-radius: 3px;
+}
+.resume-badge .sdark-sidebar .extra-title-row::before,
+.resume-badge .sb-sidebar .extra-title-row::before,
+.resume-badge .three-col-left .extra-title-row::before {
+  background: rgba(255,255,255,0.25);
+}
+
+/* ── Section overline style ── */
+.resume-sec-overline .section-title-row,
+.resume-sec-overline .extra-title-row {
+  border-bottom: none !important;
+  border-top: var(--th-sec-rule-w, 1.5px) solid;
+  padding-bottom: 0;
+  padding-top: 6px;
+  margin-bottom: 10px;
+}
+
+/* ── Section left-accent style (vertical bar left of title) ── */
+.resume-sec-left-accent .section-title-row,
+.resume-sec-left-accent .extra-title-row {
+  border-left: 3px solid var(--th-accent, #c8602a);
+  border-bottom: 1px solid rgba(0,0,0,0.07) !important;
+  padding-left: 9px;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+
+/* ── Chip underline style ── */
+.resume-chip-underline .skill-tag {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 2px 5px 2px 0 !important;
+  border-bottom: 1.5px solid var(--th-accent, #009999) !important;
+}
+.resume-chip-underline .sdark-sidebar .skill-tag,
+.resume-chip-underline .sb-sidebar .skill-tag,
+.resume-chip-underline .three-col-left .skill-tag {
+  border-bottom-color: rgba(255,255,255,0.45) !important;
+  color: rgba(255,255,255,0.85) !important;
+}
+.resume-chip-underline .sdark-sidebar.sdark-light .skill-tag,
+.resume-chip-underline .sb-sidebar.sb-light .skill-tag {
+  border-bottom-color: var(--th-accent, #009999) !important;
+  color: #333 !important;
+}
+
+/* Title pill/banner: handled via pillTitleStyle inline style in JS (CSS can't override inline styles) */

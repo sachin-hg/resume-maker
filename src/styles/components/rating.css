@@ -1,0 +1,18 @@
+/* ── Rating dots ── */
+.rating-dots { display: inline-flex; gap: 3px; align-items: center; margin-left: 6px; flex-shrink: 0; }
+.rdot { width: 8px; height: 8px; border-radius: 50%; border: 1.5px solid #1e2d3e; cursor: pointer; flex-shrink: 0; transition: background 0.1s; }
+.rdot-on { }
+.rdot-off { background: transparent; }
+.rating-stars { gap: 2px; }
+.rstar { font-size: 13px; cursor: pointer; line-height: 1; flex-shrink: 0; transition: color 0.1s; }
+@media print { .rdot, .rstar { cursor: default; } }
+.rating-bar {
+  display: inline-block; width: 72px; height: 6px; border-radius: 3px;
+  background: rgba(0,0,0,0.10); overflow: hidden; margin-left: 6px;
+  flex-shrink: 0; cursor: pointer; vertical-align: middle;
+}
+.rating-bar-fill { display: block; height: 100%; border-radius: 3px; transition: width 0.15s; }
+@media print { .rating-bar { cursor: default; } }
+.skills-rated.sec-2col { display: grid; gap: 0 24px; }
+.skills-rated.sec-2col .skills-rated-row { align-self: start; }
+.lang-chip-level { opacity: 0.65; font-size: 10px; }

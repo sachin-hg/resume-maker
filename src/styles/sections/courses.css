@@ -1,0 +1,7 @@
+/* ── Courses ── */
+.course-entry { margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid #f2f2f2; }
+.course-entry:last-child { border-bottom: none; }
+.course-header-row { display: flex; align-items: flex-start; gap: 4px; }
+.course-title { font-size: 12.5px; font-weight: 600; flex: 1; display: block; }
+.course-provider { font-size: 11px; color: #888; font-style: italic; }
+.course-desc { font-size: 11px; color: #555; display: block; margin-top: 3px; line-height: 1.4; }
