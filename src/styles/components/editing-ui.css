@@ -73,19 +73,18 @@
 .skill-tag {
   position: relative;
 }
+/* sk-handle lives INSIDE the chip (not absolute-outside) so hovering it
+   keeps the chip hovered and dragging works reliably */
 .sk-handle {
-  position: absolute;
-  left: -16px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 11px;
-  color: #aaa;
-  opacity: 0;
+  display: none;
   cursor: grab;
   user-select: none;
+  font-size: 11px;
+  color: #aaa;
+  opacity: 0.6;
 }
 .skill-tag:hover .sk-handle {
-  opacity: 1;
+  display: inline;
 }
 
 /* ── Skill chip × remove: hidden until chip hover ── */
@@ -207,6 +206,11 @@
 }
 .passion-item:hover .passion-header-row .icon-picker {
   display: inline-flex;
+}
+
+/* Passion ✕: sit to the right of the icon-picker, not on top of it */
+.passion-header-row .btn-remove-job {
+  right: -18px;
 }
 
 /* ── Job hidden-field "restore" buttons: zero-space ── */
