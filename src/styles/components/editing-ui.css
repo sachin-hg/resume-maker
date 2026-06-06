@@ -1,0 +1,219 @@
+/* ══════════════════════════════════════════════════
+   EDITING UI — zero-space controls (screen only)
+
+   These rules collapse editing-only elements so the
+   normal view matches the print layout exactly.
+   Controls appear on hover/focus-within for editing.
+   ══════════════════════════════════════════════════ */
+
+/* ── Block "Add" buttons: zero-space, appear on section hover ── */
+
+.btn-add-section {
+  display: none;
+}
+.section-wrap:hover .btn-add-section,
+.section-wrap:focus-within .btn-add-section {
+  display: block;
+}
+
+.btn-add-bullet {
+  display: none;
+}
+.job-entry:hover .btn-add-bullet,
+.job-entry:focus-within .btn-add-bullet {
+  display: block;
+}
+
+/* ── Inline "Add" buttons: hidden until container hover ── */
+
+.skills-row .btn-add-skill,
+.skills-rated .btn-add-skill {
+  display: none;
+}
+.skills-row:hover .btn-add-skill,
+.skills-rated:hover .btn-add-skill {
+  display: inline-flex;
+}
+
+.btn-ci-add {
+  display: none;
+}
+.contact-bar:hover .btn-ci-add {
+  display: inline-flex;
+}
+.contact-bar-v:hover .btn-ci-add {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+/* ── Drag handles: float outside rows, zero flow impact ── */
+
+.bullet-row,
+.skills-rated-row {
+  position: relative;
+}
+.bu-handle {
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: #aaa;
+  opacity: 0;
+  cursor: grab;
+  user-select: none;
+}
+.bullet-row:hover .bu-handle,
+.bu-drag .bu-handle,
+.skills-rated-row:hover .bu-handle {
+  opacity: 1;
+}
+
+.skill-tag {
+  position: relative;
+}
+.sk-handle {
+  position: absolute;
+  left: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 11px;
+  color: #aaa;
+  opacity: 0;
+  cursor: grab;
+  user-select: none;
+}
+.skill-tag:hover .sk-handle {
+  opacity: 1;
+}
+
+/* ── Skill chip × remove: hidden until chip hover ── */
+
+.skill-tag .skill-remove {
+  display: none;
+}
+.skill-tag:hover .skill-remove {
+  display: inline-flex;
+}
+
+/* ── Rated skills row × remove: float right of row ── */
+
+.skills-rated-row .skill-remove {
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  opacity: 0;
+  color: #ccc;
+  background: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  transition: opacity 0.1s;
+}
+.skills-rated-row:hover .skill-remove {
+  opacity: 0.6;
+}
+.skills-rated-row .skill-remove:hover {
+  color: #ff8080 !important;
+  opacity: 1;
+}
+
+/* ── Bullet × remove: float to the right of the row ── */
+
+.bullet-remove {
+  position: absolute;
+  right: -16px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+.bullet-row:hover .bullet-remove {
+  opacity: 0.45;
+}
+.bullet-remove:hover {
+  opacity: 1 !important;
+  color: #c0392b !important;
+}
+
+/* ── Item ✕ remove buttons: float to row right edge ── */
+
+.job-header-row,
+.edu-header-row,
+.ach-header-row,
+.cert-header-row,
+.course-header-row,
+.extra-item-row,
+.passion-header-row,
+.lang-row,
+.donut-legend-row {
+  position: relative;
+}
+.btn-remove-job {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.1s;
+}
+.job-entry:hover .btn-remove-job,
+.edu-entry:hover .btn-remove-job,
+.ach-item:hover .btn-remove-job,
+.cert-entry:hover .btn-remove-job,
+.course-entry:hover .btn-remove-job,
+.extra-item:hover .btn-remove-job,
+.passion-item:hover .btn-remove-job,
+.lang-row:hover .btn-remove-job,
+.donut-legend-row:hover .btn-remove-job {
+  opacity: 1;
+}
+.btn-remove-job:hover {
+  color: #c0392b !important;
+}
+
+/* Dark column overrides */
+.sdark-sidebar .btn-add-section,
+.three-col-left .btn-add-section {
+  border-color: rgba(255,255,255,0.18);
+  color: rgba(255,255,255,0.35);
+}
+.sdark-sidebar .btn-remove-job {
+  color: rgba(255,255,255,0.35);
+}
+.sdark-sidebar .btn-remove-job:hover {
+  color: #ff8080 !important;
+}
+
+/* ── MyTime value input: hide until row hover ── */
+
+.mytime-val-input {
+  display: none;
+}
+.donut-legend-row:hover .mytime-val-input {
+  display: block;
+}
+
+/* ── Passion icon picker: hide until item hover ── */
+
+.passion-header-row .icon-picker {
+  display: none;
+}
+.passion-item:hover .passion-header-row .icon-picker {
+  display: inline-flex;
+}
+
+/* ── Job hidden-field "restore" buttons: zero-space ── */
+
+.btn-field-add {
+  display: none;
+}
+.job-entry:hover .btn-field-add {
+  display: block;
+}
